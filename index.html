@@ -521,12 +521,12 @@
          * Checks if all 20 questions have been answered and updates the submit button state.
          */
         function updateSubmitButtonState() {
-            const allAnswered = answeredCount === 20;
+            const allAnswered = answeredCount === 10;
             const submitButton = document.getElementById('submit-button');
 
             if (!quizSubmitted) {
                 submitButton.disabled = !allAnswered;
-                submitButton.textContent = allAnswered ? 'Ver Nota Final' : `Responde las 20 preguntas (${answeredCount}/20)`;
+                submitButton.textContent = allAnswered ? 'Ver Nota Final' : `Responde las 20 preguntas (${answeredCount}/10)`;
             }
         }
 
@@ -577,7 +577,7 @@
          */
         function submitQuiz() {
             if (!quizStarted || quizSubmitted) return;
-            if (answeredCount < 20) {
+            if (answeredCount < 10) {
                  return;
             }
 
@@ -618,7 +618,7 @@
             });
 
             // Scoring Logic (Total 20 questions, Max score 10)
-            const questionValue = 10 / 20; // 0.5 points per correct answer
+            const questionValue = 10 / 10; // 0.5 points per correct answer
             const penalty = questionValue / 3; // 0.5 / 3 ≈ 0.1667 penalty per incorrect answer
 
             let rawScore = (correctCount * questionValue) - (incorrectCount * penalty);
@@ -644,4 +644,5 @@
     </script>
 </body>
 </html>
+
 
