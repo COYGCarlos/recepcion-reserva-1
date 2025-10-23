@@ -57,7 +57,7 @@
         <!-- Header -->
         <header class="bg-blue-600 text-white p-6 md:p-8 shadow-lg">
             <h1 class="text-3xl font-extrabold mb-1">Test U1: Recepción y Reserva</h1>
-            <p class="text-blue-200">75 preguntas generadas | 10 seleccionadas aleatoriamente</p>
+            <p class="text-blue-200">75 preguntas generadas | 20 seleccionadas aleatoriamente</p>
         </header>
 
         <!-- Main Content Area -->
@@ -293,12 +293,15 @@
         ];
         
         // --- 2. STATE MANAGEMENT ---
+        const TOTAL_QUESTIONS = 20; // <-- usa esta constante por todo el script
+
         let mode = '';
         let currentQuestions = [];
         let answers = {};
         let quizStarted = false;
         let quizSubmitted = false;
         let answeredCount = 0;
+
 
         // --- 3. CORE FUNCTIONS ---
 
@@ -327,11 +330,12 @@
          * Selects 20 random questions from the allQuestions array.
          */
         function selectRandomQuestions() {
-            // Shuffle the array
-            const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
-            // Select first 20
-            currentQuestions = shuffled.slice(0, 20);
-        }
+        // Shuffle the array
+        const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
+        // Select first TOTAL_QUESTIONS
+        currentQuestions = shuffled.slice(0, TOTAL_QUESTIONS);
+    }
+
 
         /**
          * Starts the quiz with the selected mode.
@@ -401,7 +405,7 @@
                 listContainer.innerHTML += `
                     <div id="q${questionNumber}-card" class="mb-8 p-6 border border-gray-200 rounded-xl shadow-md bg-white">
                         <p class="text-lg font-semibold mb-4 text-blue-800">
-                            <span class="bg-blue-100 px-2 py-1 rounded-full mr-2">${questionNumber}/10</span> ${qData.q}
+                            <span class="bg-blue-100 px-2 py-1 rounded-full mr-2">${questionNumber}/${TOTAL_QUESTIONS}</span>
                         </p>
                         <div class="space-y-3" id="q${questionNumber}-options-container">
                             ${optionsHtml}
@@ -521,14 +525,15 @@
          * Checks if all 20 questions have been answered and updates the submit button state.
          */
         function updateSubmitButtonState() {
-            const allAnswered = answeredCount === 10;
-            const submitButton = document.getElementById('submit-button');
+        const allAnswered = answeredCount === TOTAL_QUESTIONS;
+        const submitButton = document.getElementById('submit-button');
 
-            if (!quizSubmitted) {
-                submitButton.disabled = !allAnswered;
-                submitButton.textContent = allAnswered ? 'Ver Nota Final' : `Responde las 20 preguntas (${answeredCount}/10)`;
-            }
+        if (!quizSubmitted) {
+            submitButton.disabled = !allAnswered;
+            submitButton.textContent = allAnswered ? 'Ver Nota Final' : `Responde las ${TOTAL_QUESTIONS} preguntas (${answeredCount}/${TOTAL_QUESTIONS})`;
         }
+    }
+
 
         /**
          * Applies correction to all questions when Practice mode is submitted or when showing final results.
@@ -576,64 +581,63 @@
          * Submits the quiz (Practice Mode or Study Mode when all answered), calculates the score, and displays results.
          */
         function submitQuiz() {
-            if (!quizStarted || quizSubmitted) return;
-            if (answeredCount < 10) {
-                 return;
-            }
-
-            quizSubmitted = true;
-            applyFinalCorrection(); // Show all corrections for both modes and locks all questions
-
-            // Lock the submit button
-            document.getElementById('submit-button').disabled = true;
-
-            // Hide quiz container and show results container
-            document.getElementById('quiz-container').classList.add('hidden');
-            document.getElementById('results-container').classList.remove('hidden');
-
-            calculateScore();
-            lucide.createIcons();
+        if (!quizStarted || quizSubmitted) return;
+        if (answeredCount < TOTAL_QUESTIONS) {
+            return;
         }
+
+        quizSubmitted = true;
+        applyFinalCorrection(); // Show all corrections for both modes and locks all questions
+
+        // Lock the submit button
+        document.getElementById('submit-button').disabled = true;
+
+        // Hide quiz container and show results container
+        document.getElementById('quiz-container').classList.add('hidden');
+        document.getElementById('results-container').classList.remove('hidden');
+
+        calculateScore();
+        lucide.createIcons();
+    }
+
 
         /**
          * Calculates the final score based on the rule: 1 incorrect answer = -1/3 of a correct answer's value.
          */
         function calculateScore() {
-            let correctCount = 0;
-            let incorrectCount = 0;
-            let unansweredCount = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let unansweredCount = 0;
 
-            currentQuestions.forEach((qData, index) => {
-                const qNum = index + 1;
-                const selected = answers[qNum];
-                const isCorrect = selected === qData.a;
+        currentQuestions.forEach((qData, index) => {
+            const qNum = index + 1;
+            const selected = answers[qNum];
+            const isCorrect = selected === qData.a;
 
-                if (selected === undefined) {
-                    unansweredCount++;
-                } else if (isCorrect) {
-                    correctCount++;
-                } else {
-                    incorrectCount++;
-                }
-            });
+            if (selected === undefined) {
+                unansweredCount++;
+            } else if (isCorrect) {
+                correctCount++;
+            } else {
+                incorrectCount++;
+            }
+        });
 
-            // Scoring Logic (Total 20 questions, Max score 10)
-            const questionValue = 10 / 10; // 0.5 points per correct answer
-            const penalty = (questionValue / 3)*2; // 0.5 / 3 ≈ 0.1667 penalty per incorrect answer
+        // Scoring Logic (Total TOTAL_QUESTIONS questions, Max score 10)
+        const questionValue = 10 / TOTAL_QUESTIONS; // e.g. 10/20 = 0.5 points per correct answer
+        const penalty = questionValue / 3; // 1 fallo resta 1/3 del valor de un acierto
 
-            let rawScore = (correctCount * questionValue) - (incorrectCount * penalty);
-            const finalScore = Math.max(0, rawScore).toFixed(2); // Score must be capped at 0
+        let rawScore = (correctCount * questionValue) - (incorrectCount * penalty);
+        const finalScore = Math.max(0, rawScore).toFixed(2); // Score must be capped at 0
 
-            // Update Results Screen
-            document.getElementById('result-mode').textContent = mode === 'estudiar' ? 'Estudiar (Corrección Inmediata)' : 'Practicar (Corrección Final)';
-            document.getElementById('final-score').textContent = finalScore;
-            document.getElementById('count-correct').textContent = correctCount;
-            document.getElementById('count-incorrect').textContent = incorrectCount;
-            document.getElementById('count-unanswered').textContent = unansweredCount;
+        // Update Results Screen
+        document.getElementById('result-mode').textContent = mode === 'estudiar' ? 'Estudiar (Corrección Inmediata)' : 'Practicar (Corrección Final)';
+        document.getElementById('final-score').textContent = finalScore;
+        document.getElementById('count-correct').textContent = correctCount;
+        document.getElementById('count-incorrect').textContent = incorrectCount;
+        document.getElementById('count-unanswered').textContent = unansweredCount;
+    }
 
-            // Generate Failed Questions Review (Not implemented, but keeping the div)
-            // renderFailedQuestionsReview();
-        }
 
         // --- 4. INITIALIZATION ---
         // Initialize Lucide icons on load
@@ -644,11 +648,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
