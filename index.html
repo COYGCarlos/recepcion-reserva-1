@@ -140,145 +140,1452 @@
     <script>
         // --- 1. DATA STRUCTURE: 75 QUESTIONS (Q, Options, Answer Index, Explanation) ---
         const allQuestions = [
-            // --- A. Recepción y Organización ---
-            { q: "¿Cuál es el punto tradicional que busca una persona al acceder a un establecimiento hotelero para ser atendida e iniciar su registro?", options: ["El restaurante", "El mostrador o Front Desk", "La zona de parking", "El área de contabilidad"], a: 1, e: "El mostrador o Front Desk es el punto central y tradicional para ser atendido y realizar el registro en el hotel." },
-            { q: "¿Qué nombre recibe el departamento de recepción que se encarga de la gestión y seguimiento del día a día del establecimiento?", options: ["Departamento de Marketing", "Departamento de Alojamiento", "Departamento de Finanzas", "Departamento de Compras"], a: 1, e: "El Departamento de Alojamiento, que incluye Recepción y Pisos, gestiona el día a día de la estancia del huésped." },
-            { q: "¿Cuál es una de las funciones principales de la recepción durante la estancia del huésped?", options: ["Realizar el mantenimiento de la piscina y jardines", "Gestionar la contabilidad de la empresa", "Atender a las peticiones e incidencias del huésped", "Elaborar los menús del restaurante"], a: 2, e: "La recepción es el punto de contacto principal para la atención, peticiones e incidencias del cliente durante toda su estancia." },
-            { q: "¿Qué documento suele generar Recepción al inicio de la estancia de un huésped?", options: ["Balance de cuentas mensual", "Hoja de registro o Ficha de Cliente", "Nómina del personal", "Inventario de almacén"], a: 1, e: "La Hoja de Registro o Ficha de Cliente es obligatoria y contiene los datos del huésped, siendo generada por Recepción al realizar el check-in." },
-            { q: "¿Cuál de estos subdepartamentos suele formar parte del área de recepción y se encarga de la gestión de maletas y de la información turística?", options: ["Servicio de Telefonista", "Conserjería", "Back Office", "Control de calidad"], a: 1, e: "Conserjería gestiona el equipaje, mensajes, información turística y traslados de los huéspedes." },
-            { q: "El subdepartamento de Teléfonos tiene como función principal:", options: ["Reparar averías de las líneas", "Realizar llamadas de larga distancia personales", "Gestionar las comunicaciones internas y externas del hotel", "Controlar el acceso a internet del hotel"], a: 2, e: "El telefonista o la centralita gestionan todas las comunicaciones entrantes, salientes e internas del establecimiento." },
-            { q: "¿Qué área de recepción se enfoca en las tareas administrativas que no requieren contacto directo con el cliente, como la gestión de archivos y el control de reservas futuras?", options: ["Front Office o Mostrador", "Back Office", "Conserjería", "Servicio de Habitaciones"], a: 1, e: "El Back Office de Recepción se encarga de las tareas administrativas y de control, liberando al Front Office de las tareas de atención directa." },
-            { q: "En la estructura organizativa de un hotel, el Jefe/a de Recepción suele depender directamente de:", options: ["El Chef de Cocina", "El Director/a de Alojamiento", "El Jefe/a de Mantenimiento", "El Director/a Financiero"], a: 1, e: "El Departamento de Recepción forma parte del Departamento de Alojamiento, cuyo responsable es el superior directo del Jefe/a de Recepción." },
-            { q: "¿Cuál es una función principal del Recepcionista Nocturno?", options: ["Elaborar los platos para el desayuno", "Realizar el cierre y balance de la jornada (auditoría)", "Gestionar las compras de alimentos", "Organizar eventos y congresos"], a: 1, e: "El Recepcionista Nocturno es responsable de realizar la auditoría o cierre contable del día y tareas administrativas durante la noche." },
-            { q: "¿Qué relación interdepartamental es crucial entre Recepción y el Departamento de Pisos?", options: ["Inventario de bebidas del bar", "Estado de las habitaciones y su limpieza", "Gestión de la web corporativa", "Contratación de nuevos empleados"], a: 1, e: "La coordinación del estado de las habitaciones es vital para la venta y asignación de las mismas a los huéspedes." },
-            // --- B. Sistemas Tecnológicos (PMS, GDS, CRS, CM) ---
-            { q: "¿Qué sistema es una herramienta informática que se encarga de la gestión y seguimiento del día a día del establecimiento, registrando reservas, check-in, check-out, y facturación?", options: ["GDS", "PMS Property Management System", "TPV Terminal Punto de Venta", "ERP Enterprise Resource Planning"], a: 1, e: "El PMS es el software central de gestión operativa del hotel." },
-            { q: "¿Cuál es una característica clave del PMS mencionada en el texto, relacionada con las reservas y las tarifas?", options: ["Solo registra la ocupación anual", "Permitir la gestión de tarifas dinámicas en tiempo real", "Solo funciona para check-out", "Maneja exclusivamente la nómina"], a: 1, e: "El registro en tiempo real de las reservas permite al hotel aplicar estrategias dinámicas de precios (Revenue Management)." },
-            { q: "¿Qué sistema permite optimizar la búsqueda de información, ofreciendo una gama de productos en tiempo real y proporcionando conectividad a los establecimientos a través de agencias?", options: ["PMS", "ERP", "GDS", "TPV"], a: 2, e: "El GDS es una red de distribución que conecta a proveedores de servicios turísticos con agencias de viajes a nivel mundial." },
-            { q: "¿Qué ejemplos de GDS se mencionan en el texto?", options: ["Microsoft Excel y Word", "Amadeus y Worldspan", "Chrome y Firefox", "Google Maps y Waze"], a: 1, e: "Amadeus y Worldspan son ejemplos clásicos de Global Distribution Systems." },
-            { q: "¿Qué significa la sigla CSR o SCR en el contexto de gestión de reservas?", options: ["Corporate Social Responsibility", "Sistema Central de Reservas", "Customer Service Representative", "Cleaning and Sanitizing Registry"], a: 1, e: "CSR/SCR se refiere al Sistema Central de Reservas, especializado en un sector." },
-            { q: "¿Cuál es la función principal de un CHANNEL MANAGER?", options: ["Reparar equipos informáticos del hotel", "Sincronizar disponibilidad y precios en todos los canales online", "Gestionar únicamente la limpieza de las habitaciones", "Controlar la caja fuerte del hotel y su contenido"], a: 1, e: "El Channel Manager centraliza y sincroniza la información de disponibilidad y precios entre el PMS y todos los canales de venta online." },
-            { q: "¿Qué sistema permite realizar cargos desde otros departamentos (ej. bar) directamente a la cuenta del huésped, evitando cargos manuales y minimizando errores?", options: ["PMS", "TPV Terminal Punto de Venta", "GDS", "SCR"], a: 1, e: "El TPV permite realizar cargos automáticos a las cuentas, integrando los gastos de los diferentes puntos de venta con el PMS." },
-            { q: "¿Qué dispositivo se describe como un ordenador que aúna las funciones de un ordenador, útil para la toma de comandas si se le introduce el software adecuado?", options: ["TPV Fijo", "PC de escritorio", "PDA Personal Digital Assistant", "Servidor central"], a: 2, e: "La PDA es un dispositivo móvil que permite la toma de comandas o la gestión de tareas de forma inalámbrica." },
-            { q: "¿Qué sistema de gestión de la información automatiza los procesos operativos o productivos de la empresa y consta de varios módulos?", options: ["PMS", "GDS", "ERP Enterprise Resource Planning", "Channel Manager"], a: 2, e: "El ERP es un sistema integral que abarca todos los procesos y departamentos de la empresa (Ventas, RRHH, Finanzas)." },
-            { q: "¿Qué característica de seguridad se menciona para el ERP en el texto?", options: ["Solo funciona con efectivo", "Está protegida ante posible espionaje y accesos no autorizados", "No necesita internet para funcionar", "Solo tiene interfaz de escritorio"], a: 1, e: "El ERP es un sistema integral que está protegido ante posible espionaje, gestionando información sensible de la empresa." },
+    // --- A. Recepción y Organización (Revisadas) ---
+    {
+        q: "¿Cuál es el punto tradicional que busca una persona al acceder a un establecimiento hotelero para ser atendida e iniciar su registro?",
+        options: [
+            "El restaurante, ya que es el punto principal para consultar horarios de comidas, gestionar los servicios de A&B y la pre-reserva de mesas.",
+            "El mostrador o Front Desk, que constituye el punto neurálgico para la recepción inicial, el check-in, la identificación del huésped y la resolución inmediata de dudas de bienvenida.", // Correcta
+            "La zona de parking, ya que es donde se inicia la trazabilidad del vehículo, la seguridad y la gestión de la consigna de maletas por parte del maletero.",
+            "El área de contabilidad, ya que requiere la verificación de los métodos de pago, la validación de créditos y la pre-autorización de la tarjeta de crédito para la estancia."
+        ],
+        a: 1,
+        e: "El mostrador o Front Desk es el punto central y tradicional para ser atendido y realizar el registro en el hotel."
+    },
+    {
+        q: "¿Qué nombre recibe el departamento que se encarga de la gestión y seguimiento del día a día del establecimiento hotelero en relación con la estancia de los clientes?",
+        options: [
+            "Departamento de Marketing, encargado de las campañas promocionales, la gestión de la marca en redes sociales y la segmentación de mercados clave para aumentar ingresos.",
+            "Departamento de Alojamiento, el cual engloba las áreas de Recepción (Front/Back Office) y Pisos, siendo el responsable de toda la operativa del ciclo de hospedaje 24/7.", // Correcta
+            "Departamento de Finanzas, enfocado en el control presupuestario, la auditoría nocturna y la gestión de la liquidez bancaria diaria para asegurar la solvencia.",
+            "Departamento de Compras, responsable de la adquisición centralizada de suministros, uniformes y material de oficina bajo criterios de eficiencia de costes y calidad."
+        ],
+        a: 1,
+        e: "El Departamento de Alojamiento, que incluye Recepción y Pisos, gestiona el día a día de la estancia del huésped."
+    },
+    {
+        q: "¿Cuál es una de las funciones principales de la recepción durante la estancia del huésped?",
+        options: [
+            "Realizar el mantenimiento preventivo y correctivo de la piscina y jardines, asegurando los niveles de salubridad y la estética paisajística exterior del complejo.",
+            "Gestionar la contabilidad de la empresa, incluyendo el pago de impuestos, la presentación de balances y el control de inversiones a largo plazo según la normativa fiscal.",
+            "Atender a las peticiones e incidencias del huésped, sirviendo de punto central para la coordinación de servicios interdepartamentales (Mantenimiento, Pisos, A&B) y la resolución de problemas 24/7.", // Correcta
+            "Elaborar los menús del restaurante, decidiendo la estructura de los platos, los costes de materia prima y la gestión de inventario de cocina para optimizar el margen."
+        ],
+        a: 2,
+        e: "La recepción es el punto de contacto principal para la atención, peticiones e incidencias del cliente durante toda su estancia."
+    },
+    {
+        q: "¿Qué documento de carácter legal y administrativo suele generar Recepción al inicio de la estancia de un huésped?",
+        options: [
+            "Balance de cuentas mensual, que resume los ingresos, gastos y márgenes de beneficio del hotel y se entrega a la Dirección Financiera.",
+            "Hoja de registro o Ficha de Cliente, documento obligatorio que recopila los datos personales, fechas de estancia y la firma de aceptación de términos del huésped.", // Correcta
+            "Nómina del personal, documento emitido por Recursos Humanos que detalla el salario, deducciones y pagos a la seguridad social de cada empleado.",
+            "Inventario de almacén, informe que detalla las existencias de suministros (alimentos, bebidas, lencería) para la reposición y el control de costes."
+        ],
+        a: 1,
+        e: "La Hoja de Registro o Ficha de Cliente es obligatoria y contiene los datos del huésped, siendo generada por Recepción al realizar el check-in."
+    },
+    {
+        q: "¿Cuál de estos subdepartamentos suele formar parte del área de recepción y se encarga de la gestión de maletas, servicios de asistencia e información turística?",
+        options: [
+            "Servicio de Telefonista, el cual se enfoca en las comunicaciones internas, el manejo de la centralita telefónica y la gestión de los mensajes urgentes de entrada y salida.",
+            "Conserjería (Concierge), que gestiona el equipaje, la mensajería, la provisión de información turística especializada, la organización de traslados y la reserva de espectáculos.", // Correcta
+            "Back Office, que se dedica a las tareas administrativas a puerta cerrada, como la gestión de archivos, el control de cupos de reservas y la facturación de grupos.",
+            "Control de calidad, que realiza las encuestas de satisfacción, el seguimiento de quejas post-estancia y la implementación de protocolos de servicio estandarizados."
+        ],
+        a: 1,
+        e: "Conserjería gestiona el equipaje, mensajes, información turística y traslados de los huéspedes."
+    },
+    {
+        q: "El subdepartamento de Teléfonos (Centralita) tiene como función principal en la operativa diaria:",
+        options: [
+            "Reparar averías de las líneas telefónicas, asegurando la continuidad del servicio de telecomunicaciones, función propia del departamento de Mantenimiento.",
+            "Realizar llamadas de larga distancia personales para el personal del hotel, gestionando el cobro y la autorización previa de los gastos por parte de Dirección.",
+            "Gestionar las comunicaciones internas (extensiones) y externas (entrantes/salientes) del hotel, incluyendo el servicio de despertador y la recepción de faxes urgentes.", // Correcta
+            "Controlar el acceso a internet del hotel, optimizando el ancho de banda, la velocidad del WiFi y la seguridad de la red para los sistemas internos."
+        ],
+        a: 2,
+        e: "El telefonista o la centralita gestionan todas las comunicaciones entrantes, salientes e internas del establecimiento."
+    },
+    {
+        q: "¿Qué área de recepción se enfoca en las tareas administrativas que no requieren contacto directo con el cliente, como la gestión de archivos, la contabilidad interna y el control de reservas futuras?",
+        options: [
+            "Front Office o Mostrador, que se dedica exclusivamente a la atención directa al cliente, check-in/out, y la resolución de incidencias en persona.",
+            "Back Office, cuya responsabilidad es la gestión documental, el archivo de registros legales, el control de cupos y la planificación de reservas futuras para desahogar el Front Office.", // Correcta
+            "Conserjería, enfocada en la gestión de servicios auxiliares y personalizados como la asistencia turística, el manejo de paquetes y la coordinación de taxis y vehículos.",
+            "Servicio de Habitaciones, encargado de la gestión y el seguimiento de pedidos de comida y bebida en las estancias, coordinando con A&B y Pisos."
+        ],
+        a: 1,
+        e: "El Back Office de Recepción se encarga de las tareas administrativas y de control, liberando al Front Office de las tareas de atención directa."
+    },
+    {
+        q: "En la estructura organizativa de un hotel mediano o grande, el Jefe/a de Recepción suele depender directamente de:",
+        options: [
+            "El Chef de Cocina, ya que la Recepción es responsable de comunicar las dietas especiales y las solicitudes de desayuno a primera hora.",
+            "El Director/a de Alojamiento (Rooms Division Manager), puesto que Recepción forma parte de la división de alojamiento junto con el Departamento de Pisos.", // Correcta
+            "El Jefe/a de Mantenimiento, debido a que la Recepción es el principal punto de reporte y seguimiento de todas las averías e incidencias de infraestructura.",
+            "El Director/a Financiero, porque la Recepción es el principal punto de cobro y facturación del hotel, y debe reportar directamente el arqueo de caja."
+        ],
+        a: 1,
+        e: "El Departamento de Recepción forma parte del Departamento de Alojamiento, cuyo responsable es el superior directo del Jefe/a de Recepción."
+    },
+    {
+        q: "¿Cuál es una función principal del Recepcionista Nocturno o Auditor Nocturno?",
+        options: [
+            "Elaborar los platos para el desayuno buffet, asegurando que todos los ingredientes frescos estén listos antes de la apertura del restaurante.",
+            "Realizar el cierre y balance contable de la jornada (auditoría), procesar las tarjetas de crédito, verificar los cuadres de caja y preparar el reporte de ocupación para la mañana siguiente.", // Correcta
+            "Gestionar las compras de alimentos y bebidas (A&B), asegurando que el stock sea suficiente y que los pedidos cumplan con el presupuesto asignado.",
+            "Organizar eventos y congresos, coordinando los salones, los servicios de catering y los requerimientos audiovisuales de los clientes corporativos."
+        ],
+        a: 1,
+        e: "El Recepcionista Nocturno es responsable de realizar la auditoría o cierre contable del día y tareas administrativas durante la noche."
+    },
+    {
+        q: "¿Qué relación interdepartamental es crucial entre Recepción y el Departamento de Pisos/Gobernanta para la operativa diaria?",
+        options: [
+            "Inventario de bebidas del bar, ya que Recepción debe saber qué tipo de alcohol se consume para ofrecerlo en el Check-in como promoción.",
+            "El estado de las habitaciones y su limpieza, siendo vital que Pisos comunique al PMS el estatus de 'limpia' o 'averiada' para su asignación a los nuevos huéspedes.", // Correcta
+            "Gestión de la web corporativa, donde Pisos publica las fotos de las habitaciones limpias para atraer nuevos clientes al hotel.",
+            "Contratación de nuevos empleados, ya que Recepción ayuda a Pisos a seleccionar el personal más apto para el servicio de limpieza y mantenimiento."
+        ],
+        a: 1,
+        e: "La coordinación del estado de las habitaciones es vital para la venta y asignación de las mismas a los huéspedes."
+    },
+    // --- B. Sistemas Tecnológicos (Revisadas) ---
+    {
+        q: "¿Qué sistema es una herramienta informática que se encarga de la gestión y seguimiento del día a día del establecimiento, registrando reservas, check-in, check-out, y facturación?",
+        options: [
+            "GDS (Global Distribution System), una red externa que conecta a agencias de viaje con el inventario del hotel a nivel mundial.",
+            "PMS (Property Management System), el software central que gestiona la operativa diaria como el estado de las habitaciones, las tarifas en tiempo real y la consolidación de la facturación del huésped.", // Correcta
+            "TPV (Terminal Punto de Venta), un hardware que únicamente registra los cargos automáticos realizados en los puntos de venta (bar, restaurante) a la cuenta del cliente.",
+            "ERP (Enterprise Resource Planning), un sistema integral que abarca módulos de Ventas, Finanzas y Recursos Humanos para la planificación general de la empresa."
+        ],
+        a: 1,
+        e: "El PMS es el software central de gestión operativa del hotel."
+    },
+    {
+        q: "¿Cuál es una característica clave del PMS mencionada en el texto, relacionada con las reservas y las tarifas?",
+        options: [
+            "Solo registra la ocupación anual, sin capacidad de análisis de tendencias semanales o mensuales para la Dirección.",
+            "Permitir la gestión de tarifas dinámicas en tiempo real, adaptando los precios en función de la ocupación y la demanda (Revenue Management).", // Correcta
+            "Solo funciona para check-out, ya que el check-in se realiza mediante un proceso manual con fichas de registro físicas.",
+            "Maneja exclusivamente la nómina del personal, delegando toda la gestión de reservas al sistema GDS."
+        ],
+        a: 1,
+        e: "El registro en tiempo real de las reservas permite al hotel aplicar estrategias dinámicas de precios (Revenue Management)."
+    },
+    {
+        q: "¿Qué sistema permite optimizar la búsqueda de información, ofreciendo una gama de productos turísticos en tiempo real y proporcionando conectividad a los establecimientos a través de agencias?",
+        options: [
+            "PMS, que se enfoca en la gestión interna de la propiedad, no en la distribución externa a agencias.",
+            "ERP, que es un sistema interno para la planificación de recursos (Finanzas, RRHH) y no está diseñado para la distribución turística.",
+            "GDS (Global Distribution System), que es la red mundial que conecta el inventario del hotel con las agencias de viajes (offline y online) para facilitar la venta en tiempo real.", // Correcta
+            "TPV, un sistema de cobro que solo se utiliza en los puntos de venta del hotel para realizar transacciones monetarias."
+        ],
+        a: 2,
+        e: "El GDS es una red de distribución que conecta a proveedores de servicios turísticos con agencias de viajes a nivel mundial."
+    },
+    {
+        q: "¿Qué ejemplos de GDS (Global Distribution System) se mencionan en el texto, siendo plataformas clave en la intermediación de reservas?",
+        options: [
+            "Microsoft Excel y Word, que son herramientas de ofimática utilizadas para la redacción de informes y el manejo de bases de datos simples.",
+            "Amadeus y Worldspan, que son ejemplos clásicos y líderes de Global Distribution Systems, actuando como intermediarios entre hoteles, aerolíneas y agencias.", // Correcta
+            "Chrome y Firefox, que son navegadores web utilizados para acceder a internet y a las páginas de las OTAs.",
+            "Google Maps y Waze, que son aplicaciones de navegación y tráfico utilizadas para ofrecer indicaciones a los huéspedes."
+        ],
+        a: 1,
+        e: "Amadeus y Worldspan son ejemplos clásicos de Global Distribution Systems."
+    },
+    {
+        q: "¿Qué significa la sigla CSR o SCR en el contexto de gestión de reservas, refiriéndose a un sistema especializado?",
+        options: [
+            "Corporate Social Responsibility, un concepto de ética empresarial que guía la actuación social y medioambiental del hotel.",
+            "Sistema Central de Reservas, un software especializado que gestiona las reservas de un sector (como el hotelero) y se enlaza al PMS para actualizar el inventario.", // Correcta
+            "Customer Service Representative, la figura del empleado responsable de la atención directa y telefónica al cliente para la resolución de quejas.",
+            "Cleaning and Sanitizing Registry, un protocolo de higiene y desinfección de habitaciones utilizado por el Departamento de Pisos."
+        ],
+        a: 1,
+        e: "CSR/SCR se refiere al Sistema Central de Reservas, especializado en un sector."
+    },
+    {
+        q: "¿Cuál es la función principal de un CHANNEL MANAGER, un sistema vital en la distribución online?",
+        options: [
+            "Reparar equipos informáticos del hotel, siendo el técnico responsable de asegurar el funcionamiento del hardware y el software de Recepción.",
+            "Sincronizar la disponibilidad y los precios del PMS en todos los canales online (OTAs, GDS) en tiempo real, evitando el riesgo de overbooking y asegurando la paridad tarifaria.", // Correcta
+            "Gestionar únicamente la limpieza de las habitaciones, comunicando el estado de 'sucio' a 'limpio' al sistema de la gobernanta.",
+            "Controlar la caja fuerte del hotel y su contenido, asegurando la trazabilidad de los valores y el efectivo para la auditoría nocturna."
+        ],
+        a: 1,
+        e: "El Channel Manager centraliza y sincroniza la información de disponibilidad y precios entre el PMS y todos los canales de venta online."
+    },
+    {
+        q: "¿Qué sistema permite realizar cargos desde otros departamentos (ej. bar o spa) directamente a la cuenta del huésped, evitando la transcripción manual y minimizando errores?",
+        options: [
+            "PMS (Property Management System), que gestiona la cuenta maestra del huésped, pero no tiene la función de registrar cobros en el punto de venta.",
+            "TPV (Terminal Punto de Venta), que se integra con el PMS para automatizar el cargo del consumo del punto de venta a la factura de la habitación.", // Correcta
+            "GDS (Global Distribution System), que gestiona las reservas externas y no tiene relación directa con los cobros internos del hotel.",
+            "SCR (Sistema Central de Reservas), que solo se enfoca en la gestión de la entrada de reservas, no en la operativa de cobros diarios."
+        ],
+        a: 1,
+        e: "El TPV permite realizar cargos automáticos a las cuentas, integrando los gastos de los diferentes puntos de venta con el PMS."
+    },
+    {
+        q: "¿Qué dispositivo se describe como un ordenador que aúna las funciones de un ordenador de mano, útil para la toma de comandas o el check-in móvil si se le introduce el software adecuado?",
+        options: [
+            "TPV Fijo, que es un terminal de sobremesa conectado a una caja registradora en el Front Desk o el Bar.",
+            "PC de escritorio, que es un ordenador fijo con torre y monitor, incapaz de ser movilizado para la toma de comandas.",
+            "PDA (Personal Digital Assistant), un dispositivo móvil y compacto que permite la toma de comandas o la gestión de tareas de forma inalámbrica en diferentes puntos del hotel.", // Correcta
+            "Servidor central, que es el equipo que almacena todos los datos y programas del hotel, sin interfaz para el usuario final."
+        ],
+        a: 2,
+        e: "La PDA es un dispositivo móvil que permite la toma de comandas o la gestión de tareas de forma inalámbrica."
+    },
+    {
+        q: "¿Qué sistema de gestión de la información automatiza los procesos operativos o productivos de la empresa y consta de varios módulos interconectados (Ventas, Finanzas, RRHH)?",
+        options: [
+            "PMS (Property Management System), que se centra únicamente en la gestión de alojamiento y no abarca otros departamentos como Finanzas o RRHH.",
+            "GDS (Global Distribution System), que es una red de distribución externa y no un sistema de gestión interna de recursos.",
+            "ERP (Enterprise Resource Planning), que es un sistema integral que automatiza y coordina los procesos de todos los departamentos de la empresa para una planificación centralizada.", // Correcta
+            "Channel Manager, cuya función se limita a la sincronización de precios y disponibilidad entre el PMS y los canales de venta online."
+        ],
+        a: 2,
+        e: "El ERP es un sistema integral que abarca todos los procesos y departamentos de la empresa (Ventas, RRHH, Finanzas)."
+    },
+    {
+        q: "¿Qué característica de seguridad fundamental se menciona para el ERP en el texto, dada la sensibilidad de la información que gestiona?",
+        options: [
+            "Solo funciona con efectivo, limitando el riesgo de fraude por el uso de tarjetas de crédito o transferencias bancarias fraudulentas.",
+            "Está protegida ante posible espionaje y accesos no autorizados, implementando altos niveles de cifrado de datos y protocolos de seguridad informática.", // Correcta
+            "No necesita internet para funcionar, asegurando la continuidad del servicio incluso en caso de fallos de conexión externa.",
+            "Solo tiene interfaz de escritorio, limitando el acceso remoto y obligando a la gestión presencial de los datos críticos de la empresa."
+        ],
+        a: 1,
+        e: "El ERP es un sistema integral que está protegido ante posible espionaje, gestionando información sensible de la empresa."
+    },
 
-            // --- C. Preguntas Adicionales (Total 75) ---
-
-            { q: "La ubicación de la Recepción, ¿por qué motivo suele ser un punto estratégico en el establecimiento?", options: ["Porque está cerca de la cocina", "Porque es el lugar de tradicional acceso y atención al cliente", "Porque es donde se guardan los uniformes", "Porque es la zona más ruidosa del hotel"], a: 1, e: "La recepción está ubicada estratégicamente para ser el primer punto de contacto visual y de servicio para el huésped." },
-            { q: "¿Qué otro término se utiliza comúnmente para referirse al 'mostrador' de recepción?", options: ["Back Office", "Front Desk", "Departamento de Contabilidad", "Almacén"], a: 1, e: "El término 'Front Desk' es el equivalente anglosajón del mostrador de recepción, la parte visible del departamento." },
-            { q: "Si un huésped solicita un cambio de habitación, ¿qué departamento se encarga de gestionar esta petición?", options: ["Mantenimiento", "Comercial", "Recepción", "Recursos Humanos"], a: 2, e: "Recepción es el departamento que gestiona la asignación y el cambio de habitaciones." },
-            { q: "La parametrización informática del departamento de recepción se refiere a:", options: ["La decoración de la oficina", "La configuración y adaptación del PMS a las necesidades del hotel", "La contratación del personal informático", "La compra de papel para la impresora"], a: 1, e: "Parametrizar significa configurar un sistema informático con los datos y reglas específicas del establecimiento." },
-            { q: "¿Cuál de las siguientes es una función de control del Jefe/a de Recepción?", options: ["Pintar las paredes del hotel", "Controlar la caja y los cuadres diarios de la jornada", "Diseñar la web del hotel", "Encargarse de la jardinería"], a: 1, e: "El control de caja, cobros y cuadres es una función fundamental de supervisión en la recepción." },
-            { q: "Un Check-in requiere la verificación de la reserva y:", options: ["La limpieza de la habitación", "El pago de la cena", "La firma de la Hoja de Registro y la entrega de la llave", "El envío de un fax"], a: 2, e: "El check-in se completa con la confirmación de datos, registro legal y la entrega del medio de acceso a la habitación." },
-            { q: "¿Por qué es importante que Recepción coordine con el departamento Comercial?", options: ["Para conocer las nuevas estrategias de venta y las tarifas", "Para pedir platos de comida", "Para reparar averías", "Para lavar la ropa"], a: 0, e: "Recepción necesita conocer las tarifas y estrategias de venta para ofrecer la información correcta y gestionar las reservas conforme a ellas." },
-            { q: "La seguridad en los establecimientos de alojamiento turístico, incluye la gestión de:", options: ["Las cámaras de vigilancia y control de acceso a zonas restringidas", "La preparación de los postres", "El horario del personal de limpieza", "La decoración navideña"], a: 0, e: "Recepción controla el acceso y colabora estrechamente con el departamento de seguridad/vigilancia." },
-            { q: "¿Cuál es la principal ventaja de utilizar un TPV en lugar de realizar cargos manuales?", options: ["Aumenta la necesidad de papel", "Minimiza los errores y descuadres de facturación", "Hace más lenta la atención", "Solo acepta pago en efectivo"], a: 1, e: "La automatización del cargo reduce drásticamente la posibilidad de errores humanos en la transcripción de las cuentas." },
-            { q: "Un sistema que ofrece en tiempo real una gama de productos introduciendo parámetros adecuados se refiere al:", options: ["PMS", "GDS", "ERP", "TPV"], a: 1, e: "El GDS es la plataforma global que agrega y distribuye productos turísticos a agencias de viajes." },
-            { q: "¿Qué permite al establecimiento decidir la estrategia de adaptar tarifas, al registrar reservas en tiempo real?", options: ["El ERP", "El PMS", "El GDS", "La PDA"], a: 1, e: "El PMS es el que recibe la información de ocupación y tarifas al instante, permitiendo la gestión de revenue." },
-            { q: "¿Qué sistema de gestión automatiza procesos operativos como ventas, recursos humanos y finanzas, y está protegido ante posible espionaje?", options: ["PMS", "TPV", "ERP Enterprise Resource Planning", "GDS"], a: 2, e: "El ERP es el sistema integral que abarca todos los procesos y departamentos de la empresa." },
-            { q: "La PDA, con el software adecuado, se menciona como útil para:", options: ["Realizar el pago de impuestos", "La toma de comandas en el restaurante o bar", "La reparación de ascensores", "La gestión de la web"], a: 1, e: "Una PDA es útil como herramienta de trabajo móvil, por ejemplo, para tomar pedidos en un restaurante." },
-            { q: "¿Qué sistema está enlazado a un PMS pero se especializa en la gestión de reservas de un sector?", options: ["GDS", "CRS/SCR Sistema Central de Reservas", "TPV", "ERP"], a: 1, e: "CRS/SCR se refiere al Sistema Central de Reservas, especializado en un sector." },
-            { q: "¿Qué elemento es fundamental en la Recepción para que un establecimiento pueda ofertar sus habitaciones en la red a través de agencias?", options: ["Un buen chef", "Conectividad a través de GDS", "Una piscina muy grande", "Un gran almacén"], a: 1, e: "La conectividad proporcionada por sistemas como el GDS es esencial para la distribución online a través de agencias." },
-            { q: "El control de personal en Recepción incluye la verificación de:", options: ["La temperatura de la piscina", "Los horarios, turnos y rendimiento de los empleados", "El precio de la luz", "El estado de las carreteras"], a: 1, e: "La organización y control de personal es clave para una correcta gestión del departamento." },
-            { q: "¿Qué término hace referencia a la adaptación al contexto a la hora de controlar, organizar e innovar, buscando la mejora continua?", options: ["Inmovilismo", "Estandarización absoluta", "Flexibilidad y adaptación", "Rutina"], a: 2, e: "La adaptación al contexto implica flexibilidad e innovación para mejorar los procesos operativos." },
-            { q: "¿Qué es el 'Check-out'?", options: ["La entrada del huésped", "La salida y el cierre de la cuenta del huésped", "Un tipo de desayuno", "Una reunión de personal"], a: 1, e: "El check-out es el proceso de finalización de la estancia, que incluye la liquidación de la factura y la salida del huésped." },
-            { q: "La facturación y caja es una función que se realiza principalmente en el área de:", options: ["Cocina", "Mantenimiento", "Recepción", "Dirección"], a: 2, e: "Recepción es el departamento responsable de la facturación y el manejo de la caja." },
-            { q: "¿Cuál es un módulo típico de un ERP, además de ventas y finanzas?", options: ["Diseño gráfico", "Recursos Humanos", "Jardinería", "Meteorología"], a: 1, e: "Los ERPs suelen tener módulos para RRHH, Almacén, Ventas, Finanzas, etc., ya que son sistemas de planificación de recursos empresariales." },
-            { q: "La comunicación en el departamento de Recepción es vital con el departamento de Mantenimiento para gestionar:", options: ["Las reservas de vuelos", "Las averías y reparaciones de las habitaciones", "La compra de uniformes", "El menú del día"], a: 1, e: "La notificación de averías a Mantenimiento es clave para la satisfacción del cliente y disponibilidad de habitaciones." },
-            { q: "¿A qué se refiere la 'conectividad' proporcionada por sistemas como el GDS?", options: ["Acceso a internet para los empleados", "Capacidad del hotel para ofertarse en la red a través de agencias", "Uso de teléfonos móviles", "Conexión a la televisión por cable"], a: 1, e: "La conectividad se refiere a la capacidad de distribución e inventario en tiempo real a través de plataformas externas." },
-            { q: "¿Qué se debe evitar al máximo en el uso del TPV, según el texto, para minimizar errores?", options: ["Los cargos automáticos", "Los cargos manuales y la transcripción de las cuentas", "El uso de tarjetas de crédito", "Los pagos en efectivo"], a: 1, e: "El objetivo del TPV es evitar los cargos manuales y la consecuente minimización de errores y descuadres." },
-            { q: "El PMS facilita la toma de decisiones al permitir al establecimiento decidir la estrategia que más le convenga en cuanto a:", options: ["El color de la pintura", "Adaptar tarifas y estrategias de Revenue Management", "El tipo de música ambiental", "La cantidad de toallas"], a: 1, e: "La gestión de tarifas en función de la ocupación en tiempo real es una función clave del PMS." },
-            { q: "¿Qué es una de las tareas más importantes del 'Control de las actividades de recepción'?", options: ["Elaboración de cócteles", "Gestión de los documentos de cobro y facturación", "Reparación de cerraduras", "Limpieza de las zonas comunes"], a: 1, e: "El arqueo de caja y el control de documentos contables son esenciales para el cierre de la jornada en recepción." },
-            { q: "La figura del Recepcionista tiene la responsabilidad de:", options: ["Cocinar los platos del menú", "Supervisar las tareas del personal y la atención al cliente", "Diseñar la estrategia de marketing", "Negociar con proveedores"], a: 1, e: "El Jefe de Sector o Recepcionista de turno es responsable de la supervisión directa del equipo y la operatividad del mostrador." },
-            { q: "¿Cuál es el propósito del 'Servicio de Teléfonos' en un hotel?", options: ["Vender teléfonos móviles", "Gestionar la centralita, llamadas, mensajes y despertadores", "Reparar la red de internet", "Controlar la seguridad exterior"], a: 1, e: "Se encarga de las comunicaciones y servicios de despertador dentro del hotel." },
-            { q: "En el contexto de reservas, ¿qué significa 'optimizar la búsqueda de información' en el GDS?", options: ["Usar un buscador más rápido", "Ofrecer en tiempo real una gama de productos que responde a lo solicitado", "Comprar más ordenadores", "Limpiar el servidor"], a: 1, e: "La optimización se refiere a la eficiencia para encontrar y ofrecer el producto turístico que mejor se ajusta a los parámetros del cliente." },
-            { q: "¿Qué tipo de datos almacena principalmente el PMS?", options: ["Datos geológicos", "Datos de huéspedes, reservas, habitaciones y cargos", "Datos astronómicos", "Datos de tráfico aéreo"], a: 1, e: "El PMS gestiona todos los datos relativos a la operativa hotelera y la estancia del huésped." },
-            { q: "Si la Recepción detecta que hay una discrepancia entre la ocupación real y la registrada en el sistema, ¿qué acción debe realizar inmediatamente?", options: ["Ignorarlo", "Avisar a Contabilidad y Pisos para corregir el error", "Cerrar el hotel", "Irse a casa"], a: 1, e: "Una discrepancia de ocupación requiere una coordinación para verificar el estado de la habitación y actualizar los sistemas." },
-
-            // ... (Additional questions to reach the 75 limit) ...
-            { q: "¿Qué tipo de sistema de gestión de reservas está 'enlazado a un PMS, pero cada uno especializado en sector'?", options: ["GDS", "SCR/CRS Sistema Central de Reservas", "ERP", "TPV"], a: 1, e: "El CRS Sistema Central de Reservas está diseñado para gestionar reservas y se conecta al PMS para actualizar el inventario." },
-            { q: "La automatización de procesos operativos o productivos de la empresa es la función principal de:", options: ["GDS", "PMS", "ERP", "CHANNEL MANAGER"], a: 2, e: "El ERP es el sistema que automatiza y gestiona la planificación de recursos de toda la empresa." },
-            { q: "Si un huésped necesita que le guarden un paquete o le gestionen un servicio de lavandería, ¿a qué subdepartamento de recepción debe acudir?", options: ["Facturación", "Telefonista", "Conserjería", "Mantenimiento"], a: 2, e: "Conserjería se encarga de la atención personalizada y la gestión de servicios auxiliares como lavandería, taxis y paquetería." },
-            { q: "¿Cuál es el objetivo principal del 'Control de personal' en el departamento de Recepción?", options: ["Organizar una fiesta", "Asegurar la cobertura de turnos, el buen rendimiento y la calidad del servicio", "Limitar el uso de internet", "Contar el dinero de la caja fuerte"], a: 1, e: "El control de personal busca optimizar la gestión de RRHH para garantizar la operativa 24/7 de la recepción." },
-            { q: "El PMS permite al hotel ver la disponibilidad de habitaciones en tiempo real. Esto es esencial para:", options: ["Poder adaptar el menú del día", "Realizar overbooking de forma controlada y segura", "Decidir el color de las flores", "Contar el número de coches aparcados"], a: 1, e: "La gestión de overbooking requiere una información de inventario en tiempo real." },
-            { q: "¿Qué sistema centraliza la información de disponibilidad y precios entre el PMS y los canales de distribución online?", options: ["GDS", "CRS", "CHANNEL MANAGER", "ERP"], a: 2, e: "El Channel Manager actúa como un 'puente' para mantener la paridad y la disponibilidad actualizada en todas las plataformas de venta." },
-            { q: "Si se produce un 'descuadre' en la caja de la Recepción, ¿quién es el principal responsable de investigarlo y solucionarlo?", options: ["El camarero del bar", "El Jefe/a de Recepción o el Auditor Nocturno", "El jardinero", "El contable externo"], a: 1, e: "El Jefe/a de Recepción es el responsable directo de los cuadres de caja del departamento." },
-            { q: "¿Cómo se llama el proceso de asignar una habitación específica a un huésped con una reserva ya confirmada?", options: ["Mapping", "Blocking o Bloqueo", "Tracking", "Flipping"], a: 1, e: "El 'Bloqueo' es la acción de asignar una habitación disponible específica a una reserva." },
-            { q: "La relación entre Recepción y el Departamento de Contabilidad es esencial para:", options: ["La limpieza de las habitaciones", "El envío de la facturación y el registro de cobros", "El mantenimiento del ascensor", "La organización de eventos"], a: 1, e: "Recepción es la fuente de los datos de facturación y cobro que Contabilidad necesita para el cierre financiero." },
-            { q: "¿Qué significa que el ERP cuente con 'varios módulos'?", options: ["Que tiene varias pantallas de inicio", "Integra diferentes áreas funcionales: ventas, RRHH y finanzas", "Que solo sirve para una tarea", "Que necesita un módulo de expansión externo"], a: 1, e: "La modularidad es una característica clave del ERP, permitiendo la gestión integrada de distintas áreas de la empresa." },
-            { q: "La recepción es el punto de tradicional para ser atendido. En otras palabras, para hacer el:", options: ["Paseo", "Registro o Check-in", "Descanso", "Aseo"], a: 1, e: "El 'registro' es la principal acción inicial que se realiza en el mostrador." },
-            { q: "¿Qué dispositivo utiliza la tecnología para facilitar la toma de comandas en el restaurante y su envío a cocina?", options: ["El teléfono fijo", "La PDA", "La caja fuerte", "El televisor"], a: 1, e: "La PDA, con el software de comandas adecuado, agiliza el servicio de alimentos y bebidas." },
-            { q: "El uso del GDS es un ejemplo de cómo el establecimiento se puede ofertar en la red a través de:", options: ["Redes sociales personales", "Agencias de viajes", "Empresas de taxi", "Tiendas de ropa"], a: 1, e: "El GDS conecta al hotel con las agencias de viajes de todo el mundo." },
-            { q: "¿Cuál de estos sistemas NO está diseñado principalmente para la gestión de reservas?", options: ["PMS", "GDS", "TPV", "SCR"], a: 2, e: "El TPV está diseñado para la gestión de cobros y cargos, no de reservas." },
-            { q: "La información que facilita el Recepcionista en el Front Desk debe ser siempre:", options: ["Dudosa", "Confidencial y precisa", "Antigua", "Incompleta"], a: 1, e: "La precisión y la confidencialidad son valores esenciales en la atención al cliente en Recepción." },
-            { q: "¿Qué figura tiene la responsabilidad de realizar la auditoría o cierre contable del día durante la noche?", options: ["El Chef", "El Recepcionista Nocturno Auditor", "El Botones", "El Director General"], a: 1, e: "El Recepcionista Nocturno es clave para el control de caja y el cierre contable de la jornada." },
-            { q: "¿Cuál es el principal documento legal que se genera en la recepción al realizar el Check-in?", options: ["Ticket de comida", "Hoja de Registro", "Contrato de trabajo", "Factura de proveedores"], a: 1, e: "La Hoja de Registro recoge los datos obligatorios del huésped para su control administrativo y legal." },
-            { q: "El Back Office se centra en tareas:", options: ["De contacto directo con el cliente", "Administrativas y de archivo, sin contacto directo con el cliente", "De mantenimiento de la piscina", "De cocina"], a: 1, e: "El Back Office maneja tareas de apoyo interno para liberar al Front Office de las tareas de atención directa." },
-            { q: "La coordinación entre Recepción y Pisos es crucial para gestionar la 'limpieza y estado' de las:", options: ["Zonas comunes", "Habitaciones", "Cocinas", "Oficinas"], a: 1, e: "La Recepción necesita el estado actualizado de las habitaciones para poder asignarlas." },
-            { q: "¿Qué permite el Channel Manager en relación con las OTAs?", options: ["Reservar vuelos", "Sincronizar la disponibilidad y precios en tiempo real", "Lavar la ropa", "Contratar personal"], a: 1, e: "El Channel Manager evita la venta doble y garantiza la paridad de precios en los canales online." },
-            { q: "En el contexto hotelero, ¿qué significa la sigla TPV?", options: ["Tarifa Plana de Viajes", "Terminal Punto de Venta", "Transferencia de Personal de Vigilancia", "Tratamiento de Papel Vencido"], a: 1, e: "TPV es el sistema usado para gestionar cobros y cargos de servicios." },
-            { q: "¿Cuál es una función típica de Conserjería?", options: ["Hacer la auditoría nocturna", "Gestión de servicios externos: taxis, información turística, espectáculos", "Preparar el desayuno", "Limpiar los pasillos"], a: 1, e: "Conserjería ofrece servicios de apoyo y asistencia personalizada al huésped." },
-            { q: "Un sistema de reservas centralizado está especializado en un sector. ¿Qué sector suele ser el más relevante en la conexión con un PMS?", options: ["Farmacéutico", "Hotelero", "Naval", "Textil"], a: 1, e: "El CRS para el sector hotelero es un gestor de reservas que se conecta directamente al PMS del hotel." },
-            { q: "La gestión de los turnos y vacaciones del personal de recepción es una función del 'Control de':", options: ["Calidad", "Inventario", "Personal", "Finanzas"], a: 2, e: "El control de personal se encarga de la planificación y gestión de los recursos humanos del departamento." },
-            { q: "El concepto de 'Flexibilidad y adaptación' en la recepción busca:", options: ["Mantener siempre la misma tarifa", "La mejora continua y la innovación", "Evitar cualquier tipo de cambio", "Reducir la plantilla al mínimo"], a: 1, e: "La flexibilidad es clave para adaptarse a las necesidades cambiantes del huésped y del mercado." },
-            { q: "¿Qué ventaja ofrece la interfaz web de un ERP?", options: ["Solo funciona de noche", "Acceso a la información desde cualquier lugar con conexión", "Necesita un software especial para cada ordenador", "No permite la entrada de datos"], a: 1, e: "Una interfaz web permite el acceso remoto y la gestión de la información desde distintas ubicaciones." },
-            { q: "El TPV permite realizar cargos desde el Bar o el Restaurante directamente a la cuenta del huésped, evitando:", options: ["Las propinas", "Los cargos manuales y los errores de transcripción", "Las sonrisas", "El uso de la nevera"], a: 1, e: "Evitar los cargos manuales es el objetivo principal del TPV en la facturación del huésped." },
-            { q: "¿Amadeus y Worldspan son ejemplos de qué tipo de sistema?", options: ["PMS", "ERP", "GDS", "TPV"], a: 2, e: "Son ejemplos de Global Distribution Systems, utilizados por agencias para reservar." },
-            { q: "La función de Recepción de 'atender a las peticiones' del huésped se realiza principalmente durante la:", options: ["Reserva", "Estancia", "Contabilidad", "Selección de personal"], a: 1, e: "La recepción es el punto de atención durante toda la estancia del cliente en el hotel." },
-            { q: "¿Qué significa que un sistema esté 'protegido ante posible espionaje'?", options: ["Que tiene una cerradura física", "Que cuenta con medidas de seguridad informática y cifrado de datos", "Que no usa internet", "Que solo lo usa una persona"], a: 1, e: "Se refiere a la seguridad de los datos contra accesos no autorizados, una característica clave del ERP." },
-            { q: "La 'Cuantificación de la plantilla' de recepción tiene como objetivo:", options: ["Contar el número de bombillas", "Determinar el número óptimo de empleados por turno y necesidad", "Medir la altura del mostrador", "Pesar las maletas"], a: 1, e: "Busca dimensionar correctamente la plantilla para garantizar la atención 24/7 de la recepción." },
-            { q: "La dependencia jerárquica del Jefe/a de Recepción del Director/a de Alojamiento se debe a que Recepción forma parte de la División de:", options: ["Marketing", "Habitaciones/Alojamiento", "Cocina", "Ventas"], a: 1, e: "El Departamento de Alojamiento engloba Recepción y Pisos." },
-            { q: "¿Qué implica la 'gestión y seguimiento' del día a día por parte del Departamento de Alojamiento?", options: ["La compra de vinos", "El control de check-in, check-out y ocupación", "La reparación de vehículos", "El diseño de logotipos"], a: 1, e: "Se refiere a la operativa diaria que asegura el flujo de huéspedes y habitaciones." },
-            { q: "Si la Recepción necesita conocer si una habitación está lista para un nuevo huésped, contacta con:", options: ["Mantenimiento", "Pisos/Gobernanta", "Contabilidad", "Dirección"], a: 1, e: "Pisos informa del estado de limpieza y disponibilidad de las habitaciones." },
-            { q: "¿Qué tipo de dispositivo se describe como 'un ordenador que aúna las funciones de un ordenador'?", options: ["Servidor", "PDA Personal Digital Assistant", "Caja Registradora", "Impresora"], a: 1, e: "La PDA es un dispositivo móvil y versátil que permite funcionalidades de PC en mano." },
-            { q: "El TPV permite evitar los cargos manuales, lo que 'minimiza considerablemente' los:", options: ["Aciertos", "Errores y descuadres", "Clientes", "Desayunos"], a: 1, e: "La automatización reduce los fallos humanos en la transcripción de cargos." },
-            { q: "¿Qué módulo del ERP gestiona las contrataciones, nóminas y vacaciones?", options: ["Ventas", "Finanzas", "Almacén", "Recursos Humanos RRHH"], a: 3, e: "RRHH es el módulo del ERP encargado de la gestión del personal." },
-            { q: "La función del Back Office de 'gestión de archivos' incluye:", options: ["Lavar la ropa de cama", "Organizar la documentación de las estancias pasadas", "Servir café a los huéspedes", "Pintar la fachada"], a: 1, e: "El archivo y control documental es una tarea administrativa clave del Back Office." },
-            { q: "Al realizar el Check-out, la Recepción procede a:", options: ["Servir la cena", "Cerrar la cuenta y liquidar la factura del huésped", "Abrir la reserva", "Limpiar el bar"], a: 1, e: "El check-out implica la finalización administrativa y económica de la estancia." },
-            { q: "El PMS, al registrar reservas en tiempo real, permite la gestión dinámica de:", options: ["El clima", "Las tarifas (Revenue Management)", "El tráfico de la ciudad", "El número de pisos del hotel"], a: 1, e: "La capacidad de adaptar tarifas en función de la ocupación en tiempo real es una función crucial del PMS." },
-            { q: "¿Qué departamento se encarga de las averías y reparaciones de las instalaciones?", options: ["Recepción", "Mantenimiento", "Comercial", "Pisos"], a: 1, e: "Mantenimiento es el departamento responsable de la infraestructura y reparaciones." },
-            { q: "El 'Servicio de Teléfonos' en recepción también se encarga de la gestión de:", options: ["Los pedidos de comida a domicilio", "Los mensajes y el despertador", "La compra de vehículos", "La contabilidad"], a: 1, e: "Gestionar mensajes y las alarmas de despertador son tareas esenciales del telefonista." },
-            { q: "¿Qué significa que el GDS 'proporciona conectividad a los establecimientos'?", options: ["Que regala internet", "Que les permite vender sus productos a través de agencias en la red", "Que solo funciona sin conexión", "Que es un tipo de teléfono"], a: 1, e: "Conectividad se refiere a la capacidad de distribución global a través de la red de agencias." },
-            { q: "Si un huésped necesita información sobre un tour local, ¿quién le asistirá?", options: ["El Jefe de Cocina", "Conserjería", "El Auditor Nocturno", "El Contable"], a: 1, e: "Conserjería es el punto de referencia para información turística y servicios de asistencia." },
-            { q: "La estructura organizativa de Recepción está encabezada por el:", options: ["Presidente del País", "Jefe de Recepción", "Jefe/a de Pisos", "Jefe de Mantenimiento"], a: 1, e: "El Jefe/a de Recepción es la máxima autoridad dentro del departamento de Recepción." },
-            { q: "¿Cuál es el principal objetivo del 'Control de las actividades de recepción'?", options: ["Asegurar que el Recepcionista siempre sonría", "Garantizar la gestión de cobros, facturación y cuadre de caja", "Limitar las llamadas telefónicas", "Contar las sillas del lobby"], a: 1, e: "El control financiero y documental es prioritario para el cierre de la jornada." },
-            { q: "La relación con el departamento Comercial es importante para Recepción al momento de gestionar:", options: ["Las nuevas estrategias de venta y tarifas", "La limpieza de alfombras", "La reparación de tejados", "El menú del personal"], a: 0, e: "Recepción aplica las tarifas y políticas de venta definidas por el departamento Comercial." },
-            { q: "El sistema ERP se utiliza para la planificación de recursos. ¿Qué significa la 'E' en la sigla ERP?", options: ["Eléctrico", "Económico", "Enterprise Empresarial", "Especial"], a: 2, e: "ERP significa Enterprise Resource Planning." },
-            { q: "La seguridad en Recepción implica el control de:", options: ["Las recetas de cocina", "El acceso y las llaves de las habitaciones", "Los mensajes de texto personales", "Los uniformes sucios"], a: 1, e: "El control de acceso a las habitaciones es una función de seguridad vital de la Recepción." },
-            { q: "El PMS centraliza los datos de la estancia. ¿Qué dato NO es gestionado por el PMS de forma primaria?", options: ["El cargo del minibar", "El tipo de habitación", "La nómina del Director", "La fecha de Check-in"], a: 2, e: "La nómina es gestionada por el módulo de RRHH del ERP, no por el PMS." },
-            { q: "¿Qué subdepartamento es la 'primera cara' que ve el huésped en el hotel?", options: ["Back Office", "Front Desk Mostrador", "Lavandería", "Contabilidad"], a: 1, e: "El Front Desk es el punto de atención directa y visible para el cliente." },
-            { q: "La adaptación al contexto implica ser 'flexible' e 'innovador', buscando la:", options: ["Disminución de clientes", "Mejora continua", "Aumento de averías", "Reducción de horarios"], a: 1, e: "La mejora continua es el objetivo de la adaptación organizativa." },
-            { q: "¿Cuál es un ejemplo de TPV Fijo?", options: ["Un ordenador portátil", "Un terminal de sobremesa", "Una PDA", "Un teléfono móvil"], a: 1, e: "El TPV fijo es el terminal tradicional anclado a un mostrador o barra." },
-            { q: "El GDS optimiza la búsqueda de información ofreciendo en tiempo real una 'gama de productos'. Esto incluye:", options: ["Solo hoteles", "Hoteles, vuelos y otros servicios turísticos", "Solo productos de limpieza", "Solo material de oficina"], a: 1, e: "El GDS es una plataforma integral que distribuye múltiples productos turísticos." },
-            { q: "La Recepción debe coordinar con el departamento de Pisos para evitar:", options: ["Que el huésped coma mucho", "Asignar habitaciones que todavía están en limpieza", "Que la piscina se vacíe", "Que el sol se oculte"], a: 1, e: "La mala coordinación puede llevar a la asignación de una habitación 'sucia', un error grave." },
-            { q: "¿Qué función del Recepcionista Nocturno prepara el hotel para las operaciones del día siguiente?", options: ["El cierre y balance de la jornada (Auditoría)", "La apertura de las reservas futuras", "La atención al público durante la noche", "Todas las anteriores"], a: 3, e: "El Auditor Nocturno realiza tanto la auditoría como la atención durante la noche, preparando todo para el turno de mañana." },
-            { q: "El CHANNEL MANAGER permite al hotel gestionar sus ventas a través de:", options: ["Un único canal de distribución", "Múltiples canales de distribución Online de forma centralizada", "Solo por teléfono", "Solo por fax"], a: 1, e: "Centraliza la gestión de múltiples canales de venta online." },
-            { q: "En la facturación, el PMS agrupa todos los 'cargos' del huésped. Un cargo puede provenir de:", options: ["El servicio de habitaciones", "El bar o cafetería", "El restaurante", "Todos los anteriores"], a: 3, e: "El PMS consolida todos los gastos del huésped en su cuenta para el Check-out." },
-            { q: "¿Qué sistema está protegido ante posible espionaje y consta de varios módulos?", options: ["PMS", "TPV", "ERP Enterprise Resource Planning", "GDS"], a: 2, e: "El ERP es el sistema de gestión integral y seguro de la información empresarial." },
-            { q: "La función principal del Front Office?", options: ["Tareas administrativas internas", "Atención directa y presencial al huésped", "Mantenimiento de equipos", "Gestión de nóminas"], a: 1, e: "El Front Office es la cara del hotel y se centra en la interacción con el cliente." },
-            { q: "La necesidad de una 'Cuantificación de la plantilla' se basa en la atención que debe ofrecer Recepción, que es de:", options: ["8 horas al día", "4 horas al día", "24 horas al día, 7 días a la semana", "Solo durante el día"], a: 2, e: "La recepción opera continuamente, lo que exige una planificación de personal rigurosa." },
-            { q: "Si el CRS está enlazado al PMS, su función principal es:", options: ["Vender aviones", "Recibir, gestionar y enviar reservas al PMS", "Limpiar el lobby", "Hacer llamadas de broma"], a: 1, e: "El CRS maneja la entrada de reservas de un sector y las comunica al sistema principal." },
-            { q: "La 'facturación y caja' en Recepción implica la liquidación de cuentas y la gestión de:", options: ["Los muebles", "Los cobros y pagos de los huéspedes", "Los libros de la biblioteca", "El aire acondicionado"], a: 1, e: "La gestión de caja se refiere a la entrada y salida de dinero por servicios." },
-            { q: "¿Cuál es un ejemplo de dispositivo que permite la toma de comandas de forma inalámbrica?", options: ["Un PC de escritorio", "Un TPV fijo", "Una PDA", "Una impresora"], a: 2, e: "La PDA, por su portabilidad, es ideal para la toma de comandas móvil." },
-            { q: "El control en Recepción busca la 'mejora continua'. Esto se logra a través de:", options: ["Ignorar los errores", "La revisión constante y la adaptación al contexto", "Hacer siempre lo mismo", "No escuchar al cliente"], a: 1, e: "La mejora continua es un ciclo de revisión y adaptación." },
-            { q: "La relación entre Recepción y Dirección se enfoca en:", options: ["Los chismes", "El reporte de resultados e implementación de políticas", "La limpieza de baños", "El cambio de bombillas"], a: 1, e: "Recepción reporta directamente a la Dirección de Alojamiento, brindando información operativa crítica." },
-            { q: "Si un cliente olvida su pasaporte, ¿qué subdepartamento lo gestionará?", options: ["Mantenimiento", "Conserjería (objetos perdidos)", "Cocina", "Telefonista"], a: 1, e: "Conserjería o el Front Desk se encargan de la gestión de objetos perdidos." },
-            { q: "El TPV, al minimizar errores, ayuda a la Recepción en su función de:", options: ["Comercialización", "Control de caja y facturación", "Limpieza", "Seguridad"], a: 1, e: "Una facturación sin errores es clave para un buen control de caja." },
-            { q: "¿Cuál es el propósito del Check-in?", options: ["Aprobar una inspección", "Formalizar la entrada del huésped y el registro legal", "Reparar una avería", "Cerrar el hotel"], a: 1, e: "El check-in es el proceso de registro oficial." },
-            { q: "La parametrización del PMS incluye definir las:", options: ["Medidas de los jardines", "Tarifas, tipos de habitación y políticas de cobro", "Recetas de cocina", "Marcas de café"], a: 1, e: "Se configuran los aspectos operativos y comerciales del hotel en el sistema." },
-            { q: "Un ERP consta de varios módulos. Si una empresa adquiere uno, busca la gestión:", options: ["Aislada de cada departamento", "Centralizada e integral de los procesos", "Solo de las ventas", "Solo de la contabilidad"], a: 1, e: "La integración y centralización de la información es el gran valor del ERP." },
-            { q: "En el TPV, el 'Punto de Venta' se refiere a:", options: ["El hotel", "Cualquier lugar donde se realice un cobro (Bar, Restaurante, etc.)", "Solo la tienda de regalos", "Solo la Recepción"], a: 1, e: "Un Punto de Venta es cualquier centro de consumo dentro del establecimiento." },
-            { q: "La principal función de Conserjería es:", options: ["Limpiar el polvo", "Asistencia personalizada y gestión de servicios auxiliares", "Hacer la cena", "Escribir correos"], a: 1, e: "Se enfoca en el servicio al cliente más allá de las funciones básicas de recepción." },
-            { q: "La Recepción debe coordinarse con Mantenimiento para evitar:", options: ["Que el cliente pague", "Asignar habitaciones con averías", "Que se haga de día", "Que el teléfono suene"], a: 1, e: "Es vital no vender o asignar habitaciones que no están en perfecto estado." },
-            { q: "¿Qué función del PMS permite aplicar 'estrategias dinámicas de precios'?", options: ["El registro en tiempo real de reservas", "La impresión de facturas", "La gestión de llaves", "La alarma de incendios"], a: 0, e: "La actualización instantánea de la ocupación permite al hotel modificar precios según la demanda." },
-            { q: "El Jefe/a de Recepción es responsable de la supervisión de las tareas de:", options: ["Solo el telefonista", "Todo el personal a su cargo", "Solo el Auditor Nocturno", "Solo el director"], a: 1, e: "El Jefe de Recepción supervisa a todos los subdepartamentos bajo su mando." },
-            { q: "La seguridad incluye la gestión de las llaves/tarjetas para controlar el acceso y evitar:", options: ["Que la gente salga", "Que personas no autorizadas entren en las habitaciones", "Que se acabe la comida", "Que se encienda la televisión"], a: 1, e: "El control de accesos es una medida de seguridad fundamental para el huésped." },
-            { q: "El CHANNEL MANAGER se conecta con el PMS y el GDS para asegurar la consistencia en:", options: ["El color de los uniformes", "Inventario de habitaciones y tarifas", "El tipo de música", "La hora del desayuno"], a: 1, e: "Su función es mantener la paridad de datos entre sistemas y canales de venta." },
-            { q: "¿Cuál es el principal punto de 'contacto' entre el hotel y el huésped durante la mayor parte de la estancia?", options: ["El garaje", "La Recepción (Front Desk)", "El tejado", "La lavandería"], a: 1, e: "La Recepción es el centro neurálgico de la atención al cliente." },
-            { q: "El subdepartamento de Teléfonos es también conocido como:", options: ["El servicio de habitaciones", "La centralita", "La oficina de correos", "El almacén"], a: 1, e: "Centralita es el término tradicional para el servicio de gestión de llamadas y mensajes." },
-            { q: "¿Qué hace que el ERP esté protegido ante posible 'espionaje'?", options: ["Su ubicación física", "Sus protocolos de seguridad y cifrado", "Su bajo precio", "Su color"], a: 1, e: "La protección contra espionaje se refiere a la seguridad informática de los datos sensibles." },
-        ];
+    // --- C. Preguntas Adicionales (Revisadas) ---
+    {
+        q: "La ubicación de la Recepción, ¿por qué motivo suele ser un punto estratégico en el establecimiento?",
+        options: [
+            "Porque está cerca de la cocina, lo que permite al Recepcionista supervisar la calidad de los platos antes de que salgan al restaurante.",
+            "Porque es el lugar de tradicional acceso y atención al cliente, sirviendo como primer punto de orientación, asistencia y control central para todos los flujos de servicio.", // Correcta
+            "Porque es donde se guardan los uniformes del personal, facilitando la logística de vestuario al inicio y final de cada turno de trabajo.",
+            "Porque es la zona más ruidosa del hotel, lo que asegura que todos los huéspedes escuchen los anuncios y las llamadas importantes del personal."
+        ],
+        a: 1,
+        e: "La recepción está ubicada estratégicamente para ser el primer punto de contacto visual y de servicio para el huésped."
+    },
+    {
+        q: "¿Qué otro término se utiliza comúnmente para referirse al 'mostrador' de recepción, siendo la parte visible y de contacto directo?",
+        options: [
+            "Back Office, que es la oficina de apoyo y tareas administrativas a puerta cerrada.",
+            "Front Desk, que es el equivalente anglosajón del mostrador, el área frontal donde se atiende al cliente de forma presencial.", // Correcta
+            "Departamento de Contabilidad, que gestiona las finanzas, los balances y las cuentas a pagar del hotel.",
+            "Almacén, que es la zona de depósito de suministros, lencería y materiales de limpieza."
+        ],
+        a: 1,
+        e: "El término 'Front Desk' es el equivalente anglosajón del mostrador de recepción, la parte visible del departamento."
+    },
+    {
+        q: "Si un huésped solicita un cambio de habitación debido a un problema (ej. ruido), ¿qué departamento se encarga de gestionar esta petición?",
+        options: [
+            "Mantenimiento, que se encarga de la reparación de la infraestructura, pero no de la reasignación de estancias.",
+            "Comercial, que es responsable de la política de precios y ventas, pero no de la operativa de reasignación diaria.",
+            "Recepción, que es el departamento que verifica la disponibilidad en el PMS y gestiona el *blocking* (bloqueo) y la reasignación de la nueva habitación al huésped.", // Correcta
+            "Recursos Humanos, que gestiona al personal y las nóminas, sin injerencia en la asignación de habitaciones."
+        ],
+        a: 2,
+        e: "Recepción es el departamento que gestiona la asignación y el cambio de habitaciones."
+    },
+    {
+        q: "La parametrización informática del departamento de recepción se refiere a:",
+        options: [
+            "La decoración de la oficina, incluyendo la disposición de los escritorios y el color de las paredes para mejorar la ergonomía.",
+            "La configuración y adaptación del PMS a las necesidades específicas del hotel (tarifas, tipos de habitación, protocolos de cobro, etc.) antes de su puesta en marcha.", // Correcta
+            "La contratación del personal informático, que se encarga de la instalación de hardware y la gestión de la red interna.",
+            "La compra de papel para la impresora, un gasto menor que se gestiona a través del departamento de Compras y Almacén."
+        ],
+        a: 1,
+        e: "Parametrizar significa configurar un sistema informático con los datos y reglas específicas del establecimiento."
+    },
+    {
+        q: "¿Cuál de las siguientes es una función de control esencial del Jefe/a de Recepción?",
+        options: [
+            "Pintar las paredes del hotel, una tarea que recae en el departamento de Mantenimiento y en pintores externos especializados.",
+            "Controlar la caja y los cuadres diarios de la jornada (arqueo), supervisando los cobros, las facturaciones y la correcta aplicación de los protocolos financieros.", // Correcta
+            "Diseñar la web del hotel, una tarea del departamento de Marketing y del *webmaster* para la venta directa.",
+            "Encargarse de la jardinería, manteniendo el césped y las flores en buen estado, tarea propia del personal de Mantenimiento Exterior."
+        ],
+        a: 1,
+        e: "El control de caja, cobros y cuadres es una función fundamental de supervisión en la recepción."
+    },
+    {
+        q: "Un Check-in efectivo requiere la verificación de la reserva y:",
+        options: [
+            "La validación de que el estado de la habitación ha sido reportado oficialmente como 'Limpia' o 'Inspeccionada' por el Departamento de Pisos.",
+            "La liquidación de los posibles gastos del huésped en el restaurante o bar del día anterior para su correcto registro inicial en la cuenta.",
+            "La firma del documento legal de registro (Hoja de Cliente o *Ficha de Policía*) y la entrega del medio de acceso (llave o tarjeta) a la estancia asignada.", // Correcta
+            "La comunicación obligatoria de la llegada del huésped a los departamentos de contabilidad y ventas por vía escrita tradicional (fax o correo interno)."
+        ],
+        a: 2,
+        e: "El check-in se completa con la confirmación de datos, registro legal y la entrega del medio de acceso a la habitación."
+    },
+    {
+        q: "¿Por qué es importante que Recepción coordine con el departamento Comercial y de Ventas?",
+        options: [
+            "Para conocer las nuevas estrategias de venta, las tarifas especiales aplicadas a grupos y las políticas de descuentos, asegurando la consistencia en la información dada al huésped.", // Correcta
+            "Para pedir platos de comida al restaurante en caso de que el recepcionista tenga hambre durante su turno de trabajo.",
+            "Para reparar averías urgentes en el sistema de climatización de las habitaciones antes de la llegada del cliente.",
+            "Para lavar la ropa y los uniformes del personal de recepción, gestionando los lotes de lavandería con el departamento de Pisos."
+        ],
+        a: 0,
+        e: "Recepción necesita conocer las tarifas y estrategias de venta para ofrecer la información correcta y gestionar las reservas conforme a ellas."
+    },
+    {
+        q: "La seguridad en los establecimientos de alojamiento turístico, incluye la gestión de:",
+        options: [
+            "La preparación de los postres y la verificación de alérgenos en la cocina para asegurar la salud del cliente.",
+            "El horario del personal de limpieza, optimizando los turnos para la máxima eficiencia en horas punta.",
+            "La decoración navideña, eligiendo los adornos y luces más apropiados para la temporada festiva.",
+            "Las cámaras de vigilancia y el control de acceso a zonas restringidas y habitaciones (a través de llaves o tarjetas magnéticas)." // Correcta
+        ],
+        a: 0,
+        e: "Recepción controla el acceso y colabora estrechamente con el departamento de seguridad/vigilancia."
+    },
+    {
+        q: "¿Cuál es la principal ventaja de utilizar un TPV (Terminal Punto de Venta) en lugar de realizar cargos manuales en la facturación del huésped?",
+        options: [
+            "Aumenta la necesidad de papel, ya que genera un *ticket* en el punto de venta y otro en recepción, asegurando la doble verificación.",
+            "Minimiza los errores y descuadres de facturación, ya que automatiza la transcripción del gasto directamente a la cuenta del huésped en el PMS.", // Correcta
+            "Hace más lenta la atención, requiriendo que el personal introduzca el código de producto y la habitación de forma manual.",
+            "Solo acepta pago en efectivo, limitando los riesgos de fraude asociados al uso de tarjetas de crédito o pagos virtuales."
+        ],
+        a: 1,
+        e: "La automatización del cargo reduce drásticamente la posibilidad de errores humanos en la transcripción de las cuentas."
+    },
+    {
+        q: "Un sistema que ofrece en tiempo real una gama de productos introduciendo parámetros adecuados de búsqueda se refiere al:",
+        options: [
+            "PMS, que solo muestra el inventario interno del hotel y no la oferta de otros proveedores o servicios turísticos complementarios.",
+            "GDS, que es la plataforma global que agrega el inventario de múltiples proveedores (hoteles, aerolíneas, rent-a-car) y lo distribuye a agencias en tiempo real.", // Correcta
+            "ERP, que se enfoca en la planificación interna (RRHH, Finanzas) y no en la distribución de productos turísticos.",
+            "TPV, que es un sistema de cobro que solo registra las transacciones de venta de servicios o productos en el hotel."
+        ],
+        a: 1,
+        e: "El GDS es la plataforma global que agrega y distribuye productos turísticos a agencias de viajes."
+    },
+    {
+        q: "¿Qué permite al establecimiento decidir la estrategia de adaptar tarifas dinámicas, al registrar reservas en tiempo real?",
+        options: [
+            "El ERP, ya que integra la información de RRHH y Ventas, permitiendo una visión completa del coste de cada reserva.",
+            "El PMS (Property Management System), que es el sistema que actualiza la disponibilidad y la ocupación en el momento, permitiendo al Revenue Manager aplicar precios dinámicos.", // Correcta
+            "El GDS, que es un canal de distribución externo y solo refleja las tarifas que el hotel ha decidido publicar.",
+            "La PDA, que es un dispositivo de mano que no tiene la capacidad de procesar las complejas estrategias de tarificación."
+        ],
+        a: 1,
+        e: "El PMS es el que recibe la información de ocupación y tarifas al instante, permitiendo la gestión de revenue."
+    },
+    {
+        q: "¿Qué sistema de gestión automatiza procesos operativos como ventas, recursos humanos y finanzas, y está protegido ante posible espionaje?",
+        options: [
+            "PMS, que es el sistema específico de gestión de alojamiento, sin módulos dedicados a RRHH o Finanzas.",
+            "TPV, que solo gestiona los cobros en los puntos de venta del hotel.",
+            "ERP (Enterprise Resource Planning), que es el sistema integral que coordina la planificación de recursos de toda la empresa, implementando fuertes protocolos de seguridad informática.", // Correcta
+            "GDS, que es una red de distribución externa, no un sistema de gestión interna."
+        ],
+        a: 2,
+        e: "El ERP es el sistema integral que abarca todos los procesos y departamentos de la empresa."
+    },
+    {
+        q: "La PDA (Personal Digital Assistant), con el software adecuado, se menciona como útil para:",
+        options: [
+            "Realizar el pago de impuestos ante la administración pública, una tarea que recae en el departamento de Finanzas.",
+            "La toma de comandas en el restaurante o bar, el Check-in móvil o el reporte inalámbrico de averías a Mantenimiento.", // Correcta
+            "La reparación de ascensores y otros equipos de gran envergadura, una tarea que requiere personal técnico especializado.",
+            "La gestión de la web corporativa, una labor de *webmastering* que se realiza desde un ordenador de escritorio."
+        ],
+        a: 1,
+        e: "Una PDA es útil como herramienta de trabajo móvil, por ejemplo, para tomar pedidos en un restaurante."
+    },
+    {
+        q: "¿Qué sistema está enlazado a un PMS pero se especializa en la gestión de reservas de un sector (como aerolíneas o cadenas hoteleras con múltiples propiedades)?",
+        options: [
+            "GDS, que es la red de distribución global que se conecta con múltiples sistemas CRS.",
+            "CRS/SCR (Sistema Central de Reservas), un sistema enfocado en la centralización de reservas de un sector que se comunica con el PMS para actualizar el inventario.", // Correcta
+            "TPV, que solo gestiona los cobros en los puntos de venta del hotel.",
+            "ERP, que gestiona los recursos internos de la empresa (RRHH, Finanzas)."
+        ],
+        a: 1,
+        e: "CRS/SCR se refiere al Sistema Central de Reservas, especializado en un sector."
+    },
+    {
+        q: "¿Qué elemento es fundamental en la Recepción para que un establecimiento pueda ofertar sus habitaciones en la red a través de agencias de viajes internacionales?",
+        options: [
+            "Un buen chef, ya que la calidad de la comida es el factor principal que atrae a las agencias.",
+            "Conectividad a través de GDS (Global Distribution System) o Channel Manager, que permite la distribución y gestión del inventario en plataformas externas.", // Correcta
+            "Una piscina muy grande, ya que el tamaño de las instalaciones de ocio determina el volumen de ventas.",
+            "Un gran almacén, que asegura el suministro constante de materiales de oficina para el Back Office."
+        ],
+        a: 1,
+        e: "La conectividad proporcionada por sistemas como el GDS es esencial para la distribución online a través de agencias."
+    },
+    {
+        q: "El control de personal en Recepción incluye la verificación de:",
+        options: [
+            "La temperatura de la piscina, asegurando que cumpla con los estándares de confort y salubridad para los huéspedes.",
+            "Los horarios, turnos y rendimiento de los empleados, gestionando las rotaciones 24/7 y la evaluación de la productividad del equipo.", // Correcta
+            "El precio de la luz, para reportar al departamento de Finanzas la optimización del consumo energético del hotel.",
+            "El estado de las carreteras y la información de tráfico local para poder facilitar al huésped las mejores indicaciones de llegada y de tours."
+        ],
+        a: 1,
+        e: "La organización y control de personal es clave para una correcta gestión del departamento."
+    },
+    {
+        q: "¿Qué término hace referencia a la adaptación al contexto a la hora de controlar, organizar e innovar, buscando la mejora continua en la operativa de Recepción?",
+        options: [
+            "Inmovilismo, que es la tendencia a no cambiar procesos, manteniendo la estandarización absoluta.",
+            "Estandarización absoluta, que implica seguir el manual al pie de la letra, incluso si la situación demanda una solución diferente.",
+            "Flexibilidad y adaptación, que implica la capacidad de ajustar procesos y políticas a las necesidades del cliente y del entorno, buscando la eficiencia y la mejora continua.", // Correcta
+            "Rutina, que es la ejecución repetitiva de tareas, lo que puede llevar a la obsolescencia de los procesos."
+        ],
+        a: 2,
+        e: "La adaptación al contexto implica flexibilidad e innovación para mejorar los procesos operativos."
+    },
+    {
+        q: "¿Qué es el 'Check-out' en el ciclo de alojamiento del huésped?",
+        options: [
+            "La entrada del huésped al hotel y la formalización de su registro con la firma de la Ficha de Cliente.",
+            "La salida, el cierre y la liquidación de la cuenta del huésped (facturación final), marcando el final de su estancia administrativa.", // Correcta
+            "Un tipo de desayuno continental que se ofrece en el restaurante del hotel a los clientes con tarifa de alojamiento y desayuno.",
+            "Una reunión de personal del Front Office para discutir las incidencias del turno anterior y planificar el día."
+        ],
+        a: 1,
+        e: "El check-out es el proceso de finalización de la estancia, que incluye la liquidación de la factura y la salida del huésped."
+    },
+    {
+        q: "La facturación y caja es una función que se realiza principalmente en el área de:",
+        options: [
+            "Cocina, donde se registran los costes de materia prima para el inventario y se emiten los pedidos a proveedores.",
+            "Mantenimiento, que gestiona los gastos de reparación e infraestructura a través del ERP.",
+            "Recepción, que es el punto donde se genera la factura final, se realiza el cobro al huésped y se lleva el arqueo de caja diario.", // Correcta
+            "Dirección, que supervisa las finanzas, pero no realiza las transacciones de cobro directas al cliente."
+        ],
+        a: 2,
+        e: "Recepción es el departamento responsable de la facturación y el manejo de la caja."
+    },
+    {
+        q: "¿Cuál es un módulo típico de un ERP, además de ventas y finanzas, que gestiona el activo más importante del hotel?",
+        options: [
+            "Diseño gráfico, para la elaboración de folletos y cartelería promocional del hotel.",
+            "Recursos Humanos (RRHH), que gestiona las contrataciones, las nóminas, los turnos y las vacaciones del personal de todos los departamentos.", // Correcta
+            "Jardinería, para el control de inventario de semillas y abonos del personal de mantenimiento exterior.",
+            "Meteorología, para el registro de la temperatura y la humedad exterior."
+        ],
+        a: 1,
+        e: "Los ERPs suelen tener módulos para RRHH, Almacén, Ventas, Finanzas, etc., ya que son sistemas de planificación de recursos empresariales."
+    },
+    {
+        q: "La comunicación en el departamento de Recepción es vital con el departamento de Mantenimiento para gestionar:",
+        options: [
+            "Las reservas de vuelos y trenes para los huéspedes en el área de Conserjería.",
+            "Las averías y reparaciones de las habitaciones y zonas comunes, reportando la incidencia para su rápida solución y actualización del estatus en el PMS.", // Correcta
+            "La compra de uniformes y el equipamiento de protección personal para el personal de Recepción.",
+            "El menú del día y la preparación de las dietas especiales para el servicio de habitaciones."
+        ],
+        a: 1,
+        e: "La notificación de averías a Mantenimiento es clave para la satisfacción del cliente y disponibilidad de habitaciones."
+    },
+    {
+        q: "¿A qué se refiere la 'conectividad' proporcionada por sistemas como el GDS?",
+        options: [
+            "Acceso a internet de alta velocidad para los empleados, asegurando que puedan utilizar los sistemas internos sin interrupciones.",
+            "Capacidad del hotel para ofertarse en la red a través de agencias de viajes globales, permitiendo la distribución de inventario y tarifas en tiempo real a plataformas externas.", // Correcta
+            "Uso de teléfonos móviles y *walkie-talkies* por parte del personal de Recepción para la comunicación instantánea.",
+            "Conexión a la televisión por cable o satélite en las habitaciones, ofreciendo servicios de entretenimiento premium al huésped."
+        ],
+        a: 1,
+        e: "La conectividad se refiere a la capacidad de distribución e inventario en tiempo real a través de plataformas externas."
+    },
+    {
+        q: "¿Qué se debe evitar al máximo en el uso del TPV, según el texto, para minimizar errores de facturación?",
+        options: [
+            "Los cargos automáticos, ya que estos pueden duplicar los cobros sin que el cliente se dé cuenta.",
+            "Los cargos manuales y la transcripción de las cuentas, ya que son la principal fuente de descuadres y errores humanos en la factura del huésped.", // Correcta
+            "El uso de tarjetas de crédito con banda magnética, prefiriendo siempre el chip o el *contactless* por seguridad.",
+            "Los pagos en efectivo, que requieren una auditoría nocturna más rigurosa y un mayor control de caja."
+        ],
+        a: 1,
+        e: "El objetivo del TPV es evitar los cargos manuales y la consecuente minimización de errores y descuadres."
+    },
+    {
+        q: "El PMS facilita la toma de decisiones al permitir al establecimiento decidir la estrategia que más le convenga en cuanto a:",
+        options: [
+            "El color de la pintura de las habitaciones, una decisión de diseño interior que no afecta la operativa diaria de tarifas.",
+            "Adaptar tarifas y estrategias de Revenue Management, gracias al monitoreo en tiempo real de la ocupación y la demanda.", // Correcta
+            "El tipo de música ambiental que se escucha en el lobby, una decisión de marketing sensorial.",
+            "La cantidad de toallas que se colocan en cada habitación, una política del Departamento de Pisos."
+        ],
+        a: 1,
+        e: "La gestión de tarifas en función de la ocupación en tiempo real es una función clave del PMS."
+    },
+    {
+        q: "¿Qué es una de las tareas más importantes del 'Control de las actividades de recepción' en el cierre de la jornada?",
+        options: [
+            "Elaboración de cócteles y bebidas para el *happy hour* en el lobby bar, tarea propia del personal de A&B.",
+            "Gestión de los documentos de cobro y facturación, incluyendo la verificación diaria del arqueo de caja (cash-up) y el cuadre de todas las transacciones del día.", // Correcta
+            "Reparación de cerraduras electrónicas y la programación de tarjetas de acceso para las reservas del día siguiente.",
+            "Limpieza de las zonas comunes del hotel, incluyendo el aspirado y la desinfección de los baños del lobby."
+        ],
+        a: 1,
+        e: "El arqueo de caja y el control de documentos contables son esenciales para el cierre de la jornada en recepción."
+    },
+    {
+        q: "La figura del Recepcionista tiene la responsabilidad de:",
+        options: [
+            "Cocinar los platos del menú para el servicio de habitaciones, tarea propia del Chef y el equipo de cocina.",
+            "Supervisar las tareas del personal de su turno (Telefonista, Botones) y asegurar la máxima calidad en la atención al cliente en el Front Desk.", // Correcta
+            "Diseñar la estrategia de marketing y las campañas de publicidad online y offline del hotel.",
+            "Negociar con proveedores los precios de la lencería y los suministros de limpieza, una función de Compras."
+        ],
+        a: 1,
+        e: "El Jefe de Sector o Recepcionista de turno es responsable de la supervisión directa del equipo y la operatividad del mostrador."
+    },
+    {
+        q: "¿Cuál es el propósito esencial del 'Servicio de Teléfonos' en un hotel?",
+        options: [
+            "Vender teléfonos móviles y dispositivos electrónicos a los huéspedes que hayan olvidado el suyo.",
+            "Gestionar la centralita, las llamadas entrantes y salientes, los mensajes urgentes y el servicio de despertador para los huéspedes.", // Correcta
+            "Reparar la red de internet y el router central, tarea del personal de Mantenimiento Informático.",
+            "Controlar la seguridad exterior del edificio, monitorizando las cámaras perimetrales y los accesos de vehículos."
+        ],
+        a: 1,
+        e: "Se encarga de las comunicaciones y servicios de despertador dentro del hotel."
+    },
+    {
+        q: "En el contexto de reservas, ¿qué significa 'optimizar la búsqueda de información' en el GDS?",
+        options: [
+            "Usar un buscador de internet más rápido y eficiente para acceder a las bases de datos de otros hoteles.",
+            "Ofrecer en tiempo real una gama de productos que responde de forma inmediata a los parámetros de fecha, destino y servicios solicitados por la agencia de viajes.", // Correcta
+            "Comprar más ordenadores de última generación para el Front Office para mejorar la velocidad de procesamiento de datos.",
+            "Limpiar el servidor central del hotel para eliminar archivos innecesarios que ralentizan el sistema."
+        ],
+        a: 1,
+        e: "La optimización se refiere a la eficiencia para encontrar y ofrecer el producto turístico que mejor se ajusta a los parámetros del cliente."
+    },
+    {
+        q: "¿Qué tipo de datos almacena principalmente el PMS (Property Management System)?",
+        options: [
+            "Datos geológicos y análisis de suelos de la ubicación del hotel.",
+            "Datos de huéspedes, reservas activas, historial de estancias, estado de las habitaciones y registro detallado de cargos y cobros.", // Correcta
+            "Datos astronómicos y las fases lunares para la planificación de eventos nocturnos.",
+            "Datos de tráfico aéreo y los horarios de llegada y salida de vuelos internacionales."
+        ],
+        a: 1,
+        e: "El PMS gestiona todos los datos relativos a la operativa hotelera y la estancia del huésped."
+    },
+    {
+        q: "Si la Recepción detecta que hay una discrepancia entre la ocupación real y la registrada en el sistema, ¿qué acción debe realizar inmediatamente?",
+        options: [
+            "Ignorarlo, asumiendo que el sistema se corregirá automáticamente durante la auditoría nocturna.",
+            "Avisar al Jefe de Recepción, al personal de Contabilidad y al Departamento de Pisos para iniciar una investigación y corregir el error en el sistema y en el estado de la habitación.", // Correcta
+            "Cerrar el hotel inmediatamente hasta que el problema sea resuelto por un técnico externo.",
+            "Irse a casa al terminar el turno, dejando una nota para el turno de la mañana sin dar más detalles."
+        ],
+        a: 1,
+        e: "Una discrepancia de ocupación requiere una coordinación para verificar el estado de la habitación y actualizar los sistemas."
+    },
+    {
+        q: "¿Qué tipo de sistema de gestión de reservas está 'enlazado a un PMS, pero cada uno especializado en sector'?",
+        options: [
+            "GDS, que es la red de distribución global que conecta a proveedores y agencias a nivel mundial.",
+            "SCR/CRS (Sistema Central de Reservas), un sistema específico que maneja las reservas de un sector (por ejemplo, una cadena de hoteles o un grupo de aerolíneas) y las canaliza al PMS individual.", // Correcta
+            "ERP, un sistema de gestión integral de la empresa que no está especializado en la gestión de reservas de un sector.",
+            "TPV, un sistema de punto de venta que solo gestiona los cobros diarios."
+        ],
+        a: 1,
+        e: "El CRS Sistema Central de Reservas está diseñado para gestionar reservas y se conecta al PMS para actualizar el inventario."
+    },
+    {
+        q: "La automatización de procesos operativos o productivos de la empresa y la coordinación de múltiples departamentos es la función principal de:",
+        options: [
+            "GDS, que se limita a la distribución de inventario a terceros.",
+            "PMS, que solo se enfoca en la gestión de alojamiento y no en la totalidad de la empresa.",
+            "ERP (Enterprise Resource Planning), que es el sistema que automatiza, integra y gestiona la planificación de recursos de toda la empresa (Finanzas, RRHH, Compras).", // Correcta
+            "CHANNEL MANAGER, que solo gestiona la sincronización de inventario con OTAs."
+        ],
+        a: 2,
+        e: "El ERP es el sistema que automatiza y gestiona la planificación de recursos de toda la empresa."
+    },
+    {
+        q: "Si un huésped necesita que le guarden un paquete o le gestionen un servicio de lavandería, ¿a qué subdepartamento de recepción debe acudir?",
+        options: [
+            "Facturación, que solo se ocupa del cierre de cuentas y de los cobros pendientes.",
+            "Telefonista, que se dedica únicamente a la gestión de llamadas y mensajes.",
+            "Conserjería (Concierge), que se encarga de la atención personalizada y la gestión de servicios auxiliares como lavandería, taxis, paquetería y gestión de ocio.", // Correcta
+            "Mantenimiento, que se ocupa de las averías y la infraestructura del hotel."
+        ],
+        a: 2,
+        e: "Conserjería se encarga de la atención personalizada y la gestión de servicios auxiliares como lavandería, taxis y paquetería."
+    },
+    {
+        q: "¿Cuál es el objetivo principal del 'Control de personal' en el departamento de Recepción?",
+        options: [
+            "Organizar una fiesta de bienvenida para el personal nuevo cada semana.",
+            "Asegurar la cobertura de turnos 24/7, el buen rendimiento individual y la calidad del servicio ofrecido a los huéspedes.", // Correcta
+            "Limitar el uso de internet del personal a solo páginas web relacionadas con el trabajo para evitar distracciones.",
+            "Contar el dinero de la caja fuerte al inicio de cada turno para asegurar que haya suficiente cambio para la jornada."
+        ],
+        a: 1,
+        e: "El control de personal busca optimizar la gestión de RRHH para garantizar la operativa 24/7 de la recepción."
+    },
+    {
+        q: "El PMS permite al hotel ver la disponibilidad de habitaciones en tiempo real. Esto es esencial para:",
+        options: [
+            "Poder adaptar el menú del día en el restaurante en función del número de huéspedes que tienen reservado el desayuno.",
+            "Realizar overbooking de forma controlada y segura, optimizando la ocupación para maximizar los ingresos por Revenue Management.", // Correcta
+            "Decidir el color de las flores que se colocan en el lobby para el día siguiente, coordinando con Mantenimiento.",
+            "Contar el número de coches aparcados en el parking para asegurar que las plazas no están siendo utilizadas por no clientes."
+        ],
+        a: 1,
+        e: "La gestión de overbooking requiere una información de inventario en tiempo real."
+    },
+    {
+        q: "¿Qué sistema centraliza la información de disponibilidad y precios entre el PMS y los canales de distribución online (OTAs y GDS)?",
+        options: [
+            "GDS, que es la red global que recibe la información del hotel y la distribuye, pero no la centraliza.",
+            "CRS, que gestiona las reservas de un solo sector, sin la función de sincronización de tarifas en múltiples canales.",
+            "CHANNEL MANAGER, que actúa como un 'puente' o *hub* para mantener la paridad y la disponibilidad actualizada en todas las plataformas de venta online en tiempo real.", // Correcta
+            "ERP, que gestiona los recursos internos de la empresa (RRHH, Finanzas) sin afectar la distribución externa."
+        ],
+        a: 2,
+        e: "El Channel Manager actúa como un 'puente' para mantener la paridad y la disponibilidad actualizada en todas las plataformas de venta."
+    },
+    {
+        q: "Si se produce un 'descuadre' en la caja de la Recepción durante el cierre del turno, ¿quién es el principal responsable de investigarlo y solucionarlo?",
+        options: [
+            "El camarero del bar, ya que es el que gestiona la mayor parte del efectivo en los puntos de venta.",
+            "El Jefe/a de Recepción o el Recepcionista Nocturno (Auditor), quienes son los responsables directos de los cuadres de caja y la documentación financiera del turno.", // Correcta
+            "El jardinero, ya que puede haber encontrado dinero suelto en las zonas exteriores.",
+            "El contable externo, que solo revisa las cuentas al final del mes y no tiene acceso a los arqueos diarios."
+        ],
+        a: 1,
+        e: "El Jefe/a de Recepción es el responsable directo de los cuadres de caja del departamento."
+    },
+    {
+        q: "¿Cómo se llama el proceso de asignar una habitación específica, que ya está limpia y lista, a un huésped con una reserva ya confirmada?",
+        options: [
+            "Mapping, que es la creación de un mapa conceptual de las habitaciones para el plan de limpieza de Pisos.",
+            "Blocking o Bloqueo, que es la acción de reservar la habitación con un número específico en el PMS y asignarla a la reserva del cliente.", // Correcta
+            "Tracking, que es el seguimiento de las incidencias o averías de la habitación a través del sistema de Mantenimiento.",
+            "Flipping, que es el cambio de orientación de la cama para asegurar que el huésped siempre duerma mirando al sur."
+        ],
+        a: 1,
+        e: "El 'Bloqueo' es la acción de asignar una habitación disponible específica a una reserva."
+    },
+    {
+        q: "La relación entre Recepción y el Departamento de Contabilidad/Finanzas es esencial para:",
+        options: [
+            "La limpieza de las habitaciones, ya que Contabilidad suministra el presupuesto para los productos de limpieza.",
+            "El envío de la facturación correcta y el registro de cobros e ingresos, ya que Recepción es la fuente de los datos económicos del huésped.", // Correcta
+            "El mantenimiento del ascensor, ya que Contabilidad paga la factura del técnico.",
+            "La organización de eventos y congresos, que es una función de Comercial y Ventas."
+        ],
+        a: 1,
+        e: "Recepción es la fuente de los datos de facturación y cobro que Contabilidad necesita para el cierre financiero."
+    },
+    {
+        q: "¿Qué significa que el ERP cuente con 'varios módulos'?",
+        options: [
+            "Que tiene varias pantallas de inicio, una para cada tipo de usuario y departamento.",
+            "Que integra diferentes áreas funcionales como Ventas, Finanzas, Recursos Humanos y Almacén en un único sistema centralizado.", // Correcta
+            "Que solo sirve para una tarea, como la contabilidad o la gestión de nóminas.",
+            "Que necesita un módulo de expansión externo para funcionar, como una base de datos adicional no incluida."
+        ],
+        a: 1,
+        e: "La modularidad es una característica clave del ERP, permitiendo la gestión integrada de distintas áreas de la empresa."
+    },
+    {
+        q: "La recepción es el punto de tradicional para ser atendido. En otras palabras, para hacer el:",
+        options: [
+            "Paseo o visita guiada por las instalaciones del hotel, que es una función de Conserjería.",
+            "Registro o Check-in, que es el proceso formal de entrada, verificación de datos y asignación de habitación en el PMS.", // Correcta
+            "Descanso o pausa del personal, que se realiza en la zona de empleados.",
+            "Aseo o uso de los baños del lobby, que es una necesidad básica del huésped."
+        ],
+        a: 1,
+        e: "El 'registro' es la principal acción inicial que se realiza en el mostrador."
+    },
+    {
+        q: "¿Qué dispositivo utiliza la tecnología para facilitar la toma de comandas en el restaurante y su envío a cocina de forma rápida e inalámbrica?",
+        options: [
+            "El teléfono fijo de la recepción, que se usa para llamar a cocina y comunicar el pedido de forma verbal.",
+            "La PDA (Personal Digital Assistant) con software de comandas, que permite al camarero introducir el pedido y enviarlo al TPV de cocina al instante.", // Correcta
+            "La caja fuerte del Front Office, que es donde se guarda el efectivo y los documentos importantes.",
+            "El televisor del lobby, que muestra los menús del día y las promociones vigentes."
+        ],
+        a: 1,
+        e: "La PDA, con el software de comandas adecuado, agiliza el servicio de alimentos y bebidas."
+    },
+    {
+        q: "El uso del GDS es un ejemplo de cómo el establecimiento se puede ofertar en la red a través de:",
+        options: [
+            "Redes sociales personales, donde los recepcionistas publican las ofertas del hotel a sus amigos y familiares.",
+            "Agencias de viajes (minoristas y mayoristas) de alcance global, que acceden a los inventarios y tarifas a través de esta plataforma de distribución.", // Correcta
+            "Empresas de taxi y transporte público, que recomiendan el hotel a sus clientes.",
+            "Tiendas de ropa y otros comercios no relacionados con el turismo."
+        ],
+        a: 1,
+        e: "El GDS conecta al hotel con las agencias de viajes de todo el mundo."
+    },
+    {
+        q: "¿Cuál de estos sistemas NO está diseñado principalmente para la gestión de reservas de alojamiento?",
+        options: [
+            "PMS (Property Management System), que gestiona las reservas internas del hotel.",
+            "GDS (Global Distribution System), que distribuye y gestiona inventario de reservas globalmente.",
+            "TPV (Terminal Punto de Venta), cuya función primordial es la gestión de cobros y cargos en los puntos de venta.", // Correcta
+            "SCR (Sistema Central de Reservas), que gestiona las reservas de un sector especializado."
+        ],
+        a: 2,
+        e: "El TPV está diseñado para la gestión de cobros y cargos, no de reservas."
+    },
+    {
+        q: "La información que facilita el Recepcionista en el Front Desk debe ser siempre:",
+        options: [
+            "Dudosa y abierta a interpretación, dejando que el huésped elija la opción que más le convenga.",
+            "Confidencial, precisa y consistente, ya que el Recepcionista es la principal fuente de información sobre el hotel, sus servicios y políticas.", // Correcta
+            "Antigua y desactualizada, basándose en folletos del año anterior.",
+            "Incompleta y vaga, para no abrumar al huésped con demasiados detalles técnicos."
+        ],
+        a: 1,
+        e: "La precisión y la confidencialidad son valores esenciales en la atención al cliente en Recepción."
+    },
+    {
+        q: "¿Qué figura tiene la responsabilidad de realizar la auditoría o cierre contable del día durante la noche?",
+        options: [
+            "El Chef, que realiza la auditoría de inventario de alimentos y bebidas en la cocina.",
+            "El Recepcionista Nocturno Auditor, que se encarga del cierre del PMS, la verificación de los cuadres de caja y la preparación del informe de gestión para el turno de mañana.", // Correcta
+            "El Botones, que realiza el recuento de maletas y los paquetes que quedan en consigna para el día siguiente.",
+            "El Director General, que revisa los balances financieros al final del mes, no diariamente."
+        ],
+        a: 1,
+        e: "El Recepcionista Nocturno es clave para el control de caja y el cierre contable de la jornada."
+    },
+    {
+        q: "¿Cuál es el principal documento legal que se genera en la recepción al realizar el Check-in, siendo obligatorio para el registro de viajeros?",
+        options: [
+            "Ticket de comida, que registra el consumo en el restaurante o bar.",
+            "Hoja de Registro o Ficha de Cliente, que contiene los datos de identificación del huésped, fechas de estancia y firma de conformidad.", // Correcta
+            "Contrato de trabajo del recepcionista, que es un documento de Recursos Humanos.",
+            "Factura de proveedores, que registra las compras de suministros y materiales."
+        ],
+        a: 1,
+        e: "La Hoja de Registro recoge los datos obligatorios del huésped para su control administrativo y legal."
+    },
+    {
+        q: "El Back Office de Recepción se centra en tareas:",
+        options: [
+            "De contacto directo con el cliente, como el Check-in, la entrega de llaves y la gestión de peticiones en el mostrador.",
+            "Administrativas y de archivo, sin contacto directo con el cliente, incluyendo la gestión de cupos, la facturación de grupos y la conciliación de cuentas.", // Correcta
+            "De mantenimiento de la piscina y el gimnasio, asegurando el correcto funcionamiento de las instalaciones de ocio.",
+            "De cocina, como el control de inventario de alimentos y la recepción de pedidos de materia prima."
+        ],
+        a: 1,
+        e: "El Back Office maneja tareas de apoyo interno para liberar al Front Office de las tareas de atención directa."
+    },
+    {
+        q: "La coordinación entre Recepción y Pisos es crucial para gestionar la 'limpieza y estado' de las:",
+        options: [
+            "Zonas comunes, como el lobby, los pasillos y los salones, cuya limpieza no afecta la asignación de habitaciones.",
+            "Habitaciones, ya que Recepción necesita saber con precisión si una estancia está lista, limpia y sin averías (*ready to sell*) para poder asignarla a un nuevo huésped.", // Correcta
+            "Cocinas, ya que Pisos informa a Recepción sobre la cantidad de platos sucios que hay en el restaurante.",
+            "Oficinas de la dirección, para asegurar que el personal administrativo trabaje en un entorno pulcro."
+        ],
+        a: 1,
+        e: "La Recepción necesita el estado actualizado de las habitaciones para poder asignarlas."
+    },
+    {
+        q: "¿Qué permite el Channel Manager en relación con las OTAs (Online Travel Agencies) y otros canales de venta?",
+        options: [
+            "Reservar vuelos, ya que el Channel Manager tiene una conexión directa con las aerolíneas a través del GDS.",
+            "Sincronizar la disponibilidad y precios en tiempo real, garantizando la paridad tarifaria y evitando el overbooking en todas las plataformas de venta.", // Correcta
+            "Lavar la ropa y los uniformes del personal de recepción, gestionando los lotes de lavandería con el departamento de Pisos.",
+            "Contratar personal de ventas, utilizando el Channel Manager como plataforma de búsqueda de talento."
+        ],
+        a: 1,
+        e: "El Channel Manager evita la venta doble y garantiza la paridad de precios en los canales online."
+    },
+    {
+        q: "En el contexto hotelero, ¿qué significa la sigla TPV?",
+        options: [
+            "Tarifa Plana de Viajes, un tipo de paquete vacacional con un precio fijo sin importar los servicios utilizados.",
+            "Terminal Punto de Venta, que es el sistema (software/hardware) usado para gestionar cobros y cargos de servicios en el bar, restaurante, o recepción.", // Correcta
+            "Transferencia de Personal de Vigilancia, un protocolo de seguridad para la rotación de los guardias nocturnos.",
+            "Tratamiento de Papel Vencido, un proceso de archivo y destrucción de documentación antigua del Back Office."
+        ],
+        a: 1,
+        e: "TPV es el sistema usado para gestionar cobros y cargos de servicios."
+    },
+    {
+        q: "¿Cuál es una función típica y fundamental de Conserjería (Concierge)?",
+        options: [
+            "Hacer la auditoría nocturna y el arqueo de caja del turno de noche.",
+            "Gestión de servicios externos: reserva de taxis, provisión de información turística detallada, reserva de espectáculos y asistencia personalizada al huésped.", // Correcta
+            "Preparar el desayuno buffet y asegurar la calidad de los alimentos antes de la apertura del restaurante.",
+            "Limpiar los pasillos y las zonas comunes del hotel, tarea del personal de Pisos y Limpieza."
+        ],
+        a: 1,
+        e: "Conserjería ofrece servicios de apoyo y asistencia personalizada al huésped."
+    },
+    {
+        q: "Un sistema de reservas centralizado (CRS/SCR) está especializado en un sector. ¿Qué sector suele ser el más relevante en la conexión con un PMS de un hotel?",
+        options: [
+            "Farmacéutico, para la gestión de inventario de medicamentos.",
+            "Hotelero, ya que el CRS gestiona las reservas de múltiples propiedades de una cadena y las canaliza al PMS individual de cada hotel.", // Correcta
+            "Naval, para la gestión de reservas de cruceros y ferris.",
+            "Textil, para la gestión de pedidos y stocks de ropa de cama y uniformes."
+        ],
+        a: 1,
+        e: "El CRS para el sector hotelero es un gestor de reservas que se conecta directamente al PMS del hotel."
+    },
+    {
+        q: "La gestión de los turnos, horarios y vacaciones del personal de recepción es una función del 'Control de':",
+        options: [
+            "Calidad, que se enfoca en la satisfacción del cliente y la estandarización de procesos.",
+            "Inventario, que gestiona el stock de suministros y materiales de oficina.",
+            "Personal, que se encarga de la planificación, la cuantificación de la plantilla, la gestión de RRHH y la evaluación del rendimiento del equipo.", // Correcta
+            "Finanzas, que se ocupa de los presupuestos y la auditoría contable."
+        ],
+        a: 2,
+        e: "El control de personal se encarga de la planificación y gestión de los recursos humanos del departamento."
+    },
+    {
+        q: "El concepto de 'Flexibilidad y adaptación' en la recepción busca:",
+        options: [
+            "Mantener siempre la misma tarifa (tarifa rack), sin importar la ocupación o la demanda del mercado.",
+            "La mejora continua y la innovación, ajustando los procesos operativos y las políticas de servicio a las necesidades cambiantes del huésped y del entorno.", // Correcta
+            "Evitar cualquier tipo de cambio, manteniendo los procesos tradicionales por encima de la eficiencia.",
+            "Reducir la plantilla al mínimo, sacrificando la calidad del servicio para ahorrar costes laborales."
+        ],
+        a: 1,
+        e: "La flexibilidad es clave para adaptarse a las necesidades cambiantes del huésped y del mercado."
+    },
+    {
+        q: "¿Qué ventaja ofrece la interfaz web de un ERP, en contraste con una aplicación de escritorio tradicional?",
+        options: [
+            "Solo funciona de noche, ya que el servidor se desconecta durante el día para ahorrar energía.",
+            "Permite el acceso a la información, la gestión de procesos y la entrada de datos desde cualquier lugar con conexión a internet, facilitando el trabajo remoto y la supervisión.", // Correcta
+            "Necesita un software especial para cada ordenador, aumentando los costes de licencia e instalación.",
+            "No permite la entrada de datos, limitándose a ser un visor de informes y *dashboards*."
+        ],
+        a: 1,
+        e: "Una interfaz web permite el acceso remoto y la gestión de la información desde distintas ubicaciones."
+    },
+    {
+        q: "El TPV permite realizar cargos desde el Bar o el Restaurante directamente a la cuenta del huésped, evitando:",
+        options: [
+            "Las propinas al personal de servicio, ya que el cobro es automatizado.",
+            "Los cargos manuales y los errores de transcripción, lo que garantiza la precisión de la factura final del huésped.", // Correcta
+            "Las sonrisas del personal, ya que la automatización hace innecesaria la interacción humana.",
+            "El uso de la nevera o el almacén, ya que los productos se reponen automáticamente."
+        ],
+        a: 1,
+        e: "Evitar los cargos manuales es el objetivo principal del TPV en la facturación del huésped."
+    },
+    {
+        q: "¿Amadeus y Worldspan son ejemplos de qué tipo de sistema de distribución global?",
+        options: [
+            "PMS (Property Management System), que gestiona el inventario de un solo hotel.",
+            "ERP (Enterprise Resource Planning), que gestiona los recursos internos de la empresa.",
+            "GDS (Global Distribution System), que conecta a proveedores de servicios turísticos (hoteles, aerolíneas) con agencias de viajes a nivel mundial.", // Correcta
+            "TPV (Terminal Punto de Venta), que gestiona los cobros diarios."
+        ],
+        a: 2,
+        e: "Son ejemplos de Global Distribution Systems, utilizados por agencias para reservar."
+    },
+    {
+        q: "La función de Recepción de 'atender a las peticiones' del huésped se realiza principalmente durante la:",
+        options: [
+            "Reserva, ya que es el momento en el que el cliente solicita las características específicas de su habitación.",
+            "Estancia, ya que es durante el periodo de hospedaje cuando el cliente demanda servicios, solicita información o reporta incidencias.", // Correcta
+            "Contabilidad, que es el momento en el que se cierran las cuentas y se auditan las transacciones.",
+            "Selección de personal, que es un proceso de Recursos Humanos."
+        ],
+        a: 1,
+        e: "La recepción es el punto de atención durante toda la estancia del cliente en el hotel."
+    },
+    {
+        q: "¿Qué significa que un sistema (como el ERP) esté 'protegido ante posible espionaje'?",
+        options: [
+            "Que tiene una cerradura física en la puerta del servidor, impidiendo el acceso manual a los datos.",
+            "Que cuenta con robustas medidas de seguridad informática y cifrado de datos, protegiendo la información sensible (finanzas, clientes) de accesos no autorizados.", // Correcta
+            "Que no usa internet para funcionar, limitando la exposición a amenazas externas.",
+            "Que solo lo usa una persona, reduciendo el riesgo de filtraciones internas de información."
+        ],
+        a: 1,
+        e: "Se refiere a la seguridad de los datos contra accesos no autorizados, una característica clave del ERP."
+    },
+    {
+        q: "La 'Cuantificación de la plantilla' de recepción tiene como objetivo:",
+        options: [
+            "Contar el número de bombillas fundidas en el lobby para el reporte de Mantenimiento.",
+            "Determinar el número óptimo de empleados por turno y necesidad operativa (ej. temporada alta), garantizando la atención 24/7 sin excesos de personal.", // Correcta
+            "Medir la altura del mostrador y el tamaño de los uniformes para el nuevo personal.",
+            "Pesar las maletas de los huéspedes para determinar el precio del servicio de conserjería."
+        ],
+        a: 1,
+        e: "Busca dimensionar correctamente la plantilla para garantizar la atención 24/7 de la recepción."
+    },
+    {
+        q: "La dependencia jerárquica del Jefe/a de Recepción del Director/a de Alojamiento se debe a que Recepción forma parte de la División de:",
+        options: [
+            "Marketing, que se enfoca en la promoción y la publicidad.",
+            "Habitaciones/Alojamiento (Rooms Division), que engloba a Recepción y Pisos como áreas responsables de la estancia del huésped.", // Correcta
+            "Cocina, que se encarga de la preparación de alimentos y bebidas.",
+            "Ventas, que gestiona las tarifas y los cupos de las habitaciones."
+        ],
+        a: 1,
+        e: "El Departamento de Alojamiento engloba Recepción y Pisos."
+    },
+    {
+        q: "¿Qué implica la 'gestión y seguimiento' del día a día por parte del Departamento de Alojamiento?",
+        options: [
+            "La compra de vinos y licores para el bar y el servicio de habitaciones.",
+            "El control de check-in, check-out, la ocupación en tiempo real y la coordinación con Pisos para asegurar el flujo de habitaciones limpias y disponibles.", // Correcta
+            "La reparación de vehículos de transporte del hotel para el servicio de traslados.",
+            "El diseño de logotipos y material gráfico para la identidad corporativa del hotel."
+        ],
+        a: 1,
+        e: "Se refiere a la operativa diaria que asegura el flujo de huéspedes y habitaciones."
+    },
+    {
+        q: "Si la Recepción necesita conocer si una habitación está lista para un nuevo huésped, ¿con qué departamento contacta principalmente?",
+        options: [
+            "Mantenimiento, para saber si ha terminado de reparar el grifo averiado.",
+            "Pisos/Gobernanta, ya que este departamento es el responsable de certificar el estado de limpieza y la disponibilidad final de la habitación en el PMS.", // Correcta
+            "Contabilidad, para verificar si la habitación tiene algún cargo pendiente de un huésped anterior.",
+            "Dirección, para pedir permiso antes de asignar la habitación a un nuevo cliente."
+        ],
+        a: 1,
+        e: "Pisos informa del estado de limpieza y disponibilidad de las habitaciones."
+    },
+    {
+        q: "¿Qué tipo de dispositivo se describe como 'un ordenador que aúna las funciones de un ordenador' en la palma de la mano?",
+        options: [
+            "Servidor central, un equipo de gran capacidad que almacena los datos.",
+            "PDA (Personal Digital Assistant), un dispositivo móvil y compacto que, con el software adecuado, permite realizar tareas de PC de forma inalámbrica.", // Correcta
+            "Caja Registradora tradicional, que solo se utiliza para registrar transacciones de efectivo.",
+            "Impresora multifunción, que solo se utiliza para imprimir y escanear documentos."
+        ],
+        a: 1,
+        e: "La PDA es un dispositivo móvil y versátil que permite funcionalidades de PC en mano."
+    },
+    {
+        q: "El TPV permite evitar los cargos manuales, lo que 'minimiza considerablemente' los:",
+        options: [
+            "Aciertos en la facturación, ya que el sistema puede ser demasiado complejo para el personal.",
+            "Errores de transcripción y descuadres en el arqueo de caja, gracias a la automatización del registro de cobros.", // Correcta
+            "Clientes que visitan el bar o restaurante del hotel.",
+            "Desayunos que se ofrecen en la tarifa de alojamiento, ya que el TPV solo registra consumos adicionales."
+        ],
+        a: 1,
+        e: "La automatización reduce los fallos humanos en la transcripción de cargos."
+    },
+    {
+        q: "¿Qué módulo del ERP gestiona las contrataciones, nóminas y vacaciones del personal del hotel?",
+        options: [
+            "Ventas, que se enfoca en la gestión de tarifas y *yield management*.",
+            "Finanzas, que se centra en el presupuesto, el balance de cuentas y el pago a proveedores.",
+            "Almacén, que gestiona el inventario de suministros y materiales de limpieza.",
+            "Recursos Humanos (RRHH), que es el módulo del ERP encargado de la gestión integral de la plantilla, desde la contratación hasta el pago de nóminas.", // Correcta
+        ],
+        a: 3,
+        e: "RRHH es el módulo del ERP encargado de la gestión del personal."
+    },
+    {
+        q: "La función del Back Office de 'gestión de archivos' incluye:",
+        options: [
+            "Lavar la ropa de cama sucia que devuelve Pisos para su posterior reutilización.",
+            "Organizar, digitalizar y archivar la documentación legal y financiera de las estancias pasadas para su consulta y auditoría.", // Correcta
+            "Servir café a los huéspedes que esperan en el lobby por su habitación.",
+            "Pintar la fachada del hotel durante la temporada baja para mejorar la estética exterior."
+        ],
+        a: 1,
+        e: "El archivo y control documental es una tarea administrativa clave del Back Office."
+    },
+    {
+        q: "Al realizar el Check-out, la Recepción procede a:",
+        options: [
+            "Servir la cena en la habitación, como último servicio al huésped antes de su partida.",
+            "Cerrar la cuenta, liquidar la factura del huésped y finalizar la estancia en el PMS, generando la salida del sistema.", // Correcta
+            "Abrir la reserva en el PMS, iniciando el ciclo de estancia del huésped.",
+            "Limpiar el bar del lobby y preparar las mesas para el siguiente servicio."
+        ],
+        a: 1,
+        e: "El check-out implica la finalización administrativa y económica de la estancia."
+    },
+    {
+        q: "El PMS, al registrar reservas en tiempo real, permite la gestión dinámica de:",
+        options: [
+            "El clima y la temperatura del exterior, una variable que no puede ser gestionada por el hotel.",
+            "Las tarifas (Revenue Management), adaptando los precios en función de la ocupación, la demanda y las tarifas de la competencia.", // Correcta
+            "El tráfico de la ciudad, informando a la policía de los atascos cercanos al hotel.",
+            "El número de pisos del hotel y la altura de las habitaciones, que es una variable estática de la infraestructura."
+        ],
+        a: 1,
+        e: "La capacidad de adaptar tarifas en función de la ocupación en tiempo real es una función crucial del PMS."
+    },
+    {
+        q: "¿Qué departamento se encarga de gestionar y solucionar las averías y reparaciones de las instalaciones y el equipamiento del hotel?",
+        options: [
+            "Recepción, que solo se encarga de reportar la incidencia y coordinar la respuesta.",
+            "Mantenimiento, que es el responsable de ejecutar el plan preventivo y correctivo para asegurar el correcto funcionamiento de toda la infraestructura.", // Correcta
+            "Comercial, que se encarga de negociar los presupuestos con los proveedores de servicios técnicos.",
+            "Pisos, que solo se encarga de la limpieza y la gestión de la lencería."
+        ],
+        a: 1,
+        e: "Mantenimiento es el departamento responsable de la infraestructura y reparaciones."
+    },
+    {
+        q: "El 'Servicio de Teléfonos' en recepción también se encarga de la gestión de:",
+        options: [
+            "Los pedidos de comida a domicilio del personal del hotel, coordinando la recepción en la puerta de servicio.",
+            "Los mensajes internos/externos, y la programación y ejecución del servicio de despertador para los huéspedes que lo solicitan.", // Correcta
+            "La compra de vehículos de transporte para el servicio de traslados al aeropuerto, una función de Compras.",
+            "La contabilidad y el pago de facturas, una función de Finanzas."
+        ],
+        a: 1,
+        e: "Gestionar mensajes y las alarmas de despertador son tareas esenciales del telefonista."
+    },
+    {
+        q: "¿Qué significa que el GDS 'proporciona conectividad a los establecimientos'?",
+        options: [
+            "Que regala internet de alta velocidad a todos los hoteles conectados a su red.",
+            "Que les permite vender sus productos y gestionar el inventario de habitaciones a través de una red global de agencias de viajes y plataformas externas en tiempo real.", // Correcta
+            "Que solo funciona sin conexión a internet, limitando la exposición a amenazas externas.",
+            "Que es un tipo de teléfono que utiliza tecnología por satélite para comunicarse."
+        ],
+        a: 1,
+        e: "Conectividad se refiere a la capacidad de distribución global a través de la red de agencias."
+    },
+    {
+        q: "Si un huésped necesita información sobre un tour local, la reserva de una excursión o una mesa en un restaurante de prestigio, ¿quién le asistirá?",
+        options: [
+            "El Jefe de Cocina, que informará sobre la calidad culinaria de los restaurantes de la zona.",
+            "Conserjería (Concierge), que se especializa en la provisión de información turística, la gestión de reservas externas y la asistencia personalizada al huésped.", // Correcta
+            "El Auditor Nocturno, que solo trabaja de noche y se encarga del cierre contable.",
+            "El Contable, que se ocupa de la facturación y los balances financieros."
+        ],
+        a: 1,
+        e: "Conserjería es el punto de referencia para información turística y servicios de asistencia."
+    },
+    {
+        q: "La estructura organizativa de Recepción está encabezada, en términos jerárquicos, por el:",
+        options: [
+            "Presidente del País, ya que los hoteles son de interés nacional.",
+            "Jefe de Recepción (Front Office Manager), que es el máximo responsable de la operativa del departamento y la supervisión del personal.", // Correcta
+            "Jefe/a de Pisos (Gobernanta), que es responsable del estado de limpieza de las habitaciones.",
+            "Jefe de Mantenimiento, que se encarga de la infraestructura y las reparaciones."
+        ],
+        a: 1,
+        e: "El Jefe/a de Recepción es la máxima autoridad dentro del departamento de Recepción."
+    },
+    {
+        q: "¿Cuál es el principal objetivo del 'Control de las actividades de recepción' al final del día?",
+        options: [
+            "Asegurar que el Recepcionista siempre sonría y mantenga una actitud positiva, independientemente de la situación.",
+            "Garantizar la gestión de cobros, facturación y el correcto cuadre de caja (arqueo), asegurando la trazabilidad financiera de todas las transacciones.", // Correcta
+            "Limitar las llamadas telefónicas entrantes para que el personal pueda concentrarse en otras tareas.",
+            "Contar las sillas del lobby para verificar que no falte mobiliario."
+        ],
+        a: 1,
+        e: "El control financiero y documental es prioritario para el cierre de la jornada."
+    },
+    {
+        q: "La relación con el departamento Comercial es importante para Recepción al momento de gestionar:",
+        options: [
+            "Las nuevas estrategias de venta y las tarifas dinámicas, ya que Recepción es el punto de venta final y debe aplicar las políticas comerciales definidas.", // Correcta
+            "La limpieza de alfombras y cortinas, una tarea de Pisos y Mantenimiento.",
+            "La reparación de tejados y goteras en caso de lluvia, una tarea de Mantenimiento.",
+            "El menú del personal de recepción, coordinando las dietas con el Chef."
+        ],
+        a: 0,
+        e: "Recepción aplica las tarifas y políticas de venta definidas por el departamento Comercial."
+    },
+    {
+        q: "El sistema ERP se utiliza para la planificación de recursos. ¿Qué significa la 'E' en la sigla ERP?",
+        options: [
+            "Eléctrico, en referencia a la dependencia del sistema de la electricidad.",
+            "Económico, en referencia a la gestión del presupuesto de la empresa.",
+            "Enterprise (Empresarial), en referencia a la planificación de recursos de toda la organización.", // Correcta
+            "Especial, en referencia a que es un sistema diseñado a medida para el hotel."
+        ],
+        a: 2,
+        e: "ERP significa Enterprise Resource Planning."
+    },
+    {
+        q: "La seguridad en Recepción implica el control de:",
+        options: [
+            "Las recetas de cocina y los ingredientes utilizados en el restaurante.",
+            "El acceso y la gestión de las llaves/tarjetas de las habitaciones, asegurando que solo los huéspedes autorizados puedan entrar a su estancia.", // Correcta
+            "Los mensajes de texto personales del personal, monitorizando su uso durante el horario de trabajo.",
+            "Los uniformes sucios, organizando su recogida y envío a la lavandería."
+        ],
+        a: 1,
+        e: "El control de acceso a las habitaciones es una función de seguridad vital de la Recepción."
+    },
+    {
+        q: "El PMS centraliza los datos de la estancia. ¿Qué dato NO es gestionado por el PMS de forma primaria?",
+        options: [
+            "El cargo del minibar o del servicio de habitaciones, que se añade a la cuenta del huésped.",
+            "El tipo de habitación asignada y sus características (doble, suite, vista al mar).",
+            "La nómina del Director y los pagos a la seguridad social, que son funciones del módulo de RRHH del ERP.", // Correcta
+            "La fecha de Check-in y la fecha de Check-out previstas para el huésped."
+        ],
+        a: 2,
+        e: "La nómina es gestionada por el módulo de RRHH del ERP, no por el PMS."
+    },
+    {
+        q: "¿Qué subdepartamento es la 'primera cara' que ve el huésped en el hotel y el punto de atención directa?",
+        options: [
+            "Back Office, que trabaja en tareas administrativas a puerta cerrada.",
+            "Front Desk o Mostrador, que es el área visible y de interacción inicial y continua con el cliente.", // Correcta
+            "Lavandería, que se encarga de la ropa de cama y uniformes sucios.",
+            "Contabilidad, que se ubica en las oficinas administrativas y no tiene contacto directo con el huésped."
+        ],
+        a: 1,
+        e: "El Front Desk es el punto de atención directa y visible para el cliente."
+    },
+    {
+        q: "La adaptación al contexto implica ser 'flexible' e 'innovador', buscando la:",
+        options: [
+            "Disminución de clientes y reservas, para reducir la carga de trabajo del personal.",
+            "Mejora continua, la eficiencia operativa y la optimización de los procesos de servicio al huésped.", // Correcta
+            "Aumento de averías y problemas, para justificar la necesidad de un equipo de Mantenimiento grande.",
+            "Reducción de horarios y servicios ofrecidos al huésped, para ahorrar costes operativos."
+        ],
+        a: 1,
+        e: "La mejora continua es el objetivo de la adaptación organizativa."
+    },
+    {
+        q: "¿Cuál es un ejemplo de TPV Fijo, en contraste con un dispositivo móvil (PDA)?",
+        options: [
+            "Un ordenador portátil con software de cobro, que se puede mover por el hotel.",
+            "Un terminal de sobremesa, conectado a una caja registradora y anclado al Front Desk o a la barra del Bar, utilizado para cobros principales.", // Correcta
+            "Una PDA, que es un dispositivo de mano y portátil para la toma de comandas móvil.",
+            "Un teléfono móvil con una aplicación de cobro, que permite la movilidad del personal."
+        ],
+        a: 1,
+        e: "El TPV fijo es el terminal tradicional anclado a un mostrador o barra."
+    },
+    {
+        q: "El GDS optimiza la búsqueda de información ofreciendo en tiempo real una 'gama de productos'. Esto incluye:",
+        options: [
+            "Solo hoteles, ya que el GDS es una herramienta especializada únicamente en el alojamiento.",
+            "Hoteles, vuelos, coches de alquiler y otros servicios turísticos, ya que es una plataforma integral de distribución de viajes.", // Correcta
+            "Solo productos de limpieza y suministros para el hotel, ya que su objetivo es la gestión de compras.",
+            "Solo material de oficina, como bolígrafos, papel y carpetas para el Back Office."
+        ],
+        a: 1,
+        e: "El GDS es una plataforma integral que distribuye múltiples productos turísticos."
+    },
+    {
+        q: "La Recepción debe coordinar con el departamento de Pisos para evitar:",
+        options: [
+            "Que el huésped coma mucho y consuma demasiado en el restaurante, lo que podría aumentar el coste del buffet.",
+            "Asignar a un nuevo huésped habitaciones que todavía están en limpieza, causando una mala experiencia y un conflicto con el cliente (*early check-in*).", // Correcta
+            "Que la piscina se vacíe completamente, lo que es una tarea de Mantenimiento.",
+            "Que el sol se oculte demasiado pronto, una variable astronómica que no puede ser controlada por el hotel."
+        ],
+        a: 1,
+        e: "La mala coordinación puede llevar a la asignación de una habitación 'sucia', un error grave."
+    },
+    {
+        q: "¿Qué función del Recepcionista Nocturno prepara el hotel para las operaciones del día siguiente, además de la atención al público?",
+        options: [
+            "El cierre y balance de la jornada (Auditoría), que incluye el procesamiento de tarjetas y la validación de todas las transacciones del día.", // Correcta
+            "La apertura de las reservas futuras con dos años de antelación en el GDS.",
+            "La atención al público durante la noche, que es una función reactiva y no de preparación.",
+            "Todas las anteriores, ya que la Auditoría Nocturna es un proceso de cierre y apertura simultáneo."
+        ],
+        a: 3,
+        e: "El Auditor Nocturno realiza tanto la auditoría como la atención durante la noche, preparando todo para el turno de mañana."
+    },
+    {
+        q: "El CHANNEL MANAGER permite al hotel gestionar sus ventas a través de:",
+        options: [
+            "Un único canal de distribución (como el motor de reservas propio) para simplificar la gestión.",
+            "Múltiples canales de distribución Online (OTAs, GDS) de forma centralizada, asegurando la consistencia de datos y evitando el *overbooking*.", // Correcta
+            "Solo por teléfono, comunicando las reservas de forma verbal a las agencias.",
+            "Solo por fax, utilizando un método de comunicación obsoleto para confirmar las tarifas."
+        ],
+        a: 1,
+        e: "Centraliza la gestión de múltiples canales de venta online."
+    },
+    {
+        q: "En la facturación, el PMS agrupa todos los 'cargos' del huésped. Un cargo puede provenir de:",
+        options: [
+            "El servicio de habitaciones y el minibar, cargados desde el punto de venta TPV del servicio de A&B.",
+            "El bar o cafetería del lobby, cargados directamente a la cuenta de la habitación.",
+            "El restaurante principal o el spa, que utilizan el TPV para facturar a la cuenta del huésped.",
+            "Todos los anteriores, ya que el PMS consolida todos los gastos del huésped en su cuenta maestra." // Correcta
+        ],
+        a: 3,
+        e: "El PMS consolida todos los gastos del huésped en su cuenta para el Check-out."
+    },
+    {
+        q: "¿Qué sistema está protegido ante posible espionaje y consta de varios módulos para la gestión integral de la empresa?",
+        options: [
+            "PMS, que solo se enfoca en la gestión de alojamiento y no abarca toda la empresa.",
+            "TPV, que es un sistema de cobro limitado a transacciones de venta.",
+            "ERP (Enterprise Resource Planning), que es el sistema de gestión integral de la información empresarial, protegido con altos niveles de seguridad y cifrado de datos.", // Correcta
+            "GDS, que es una red de distribución externa y no un sistema de gestión interna de seguridad."
+        ],
+        a: 2,
+        e: "El ERP es el sistema de gestión integral y seguro de la información empresarial."
+    },
+    {
+        q: "¿Cuál es la función principal del Front Office o Mostrador?",
+        options: [
+            "Tareas administrativas internas, archivo y contabilidad, que son funciones del Back Office.",
+            "Atención directa y presencial al huésped, incluyendo Check-in, Check-out, gestión de peticiones y resolución de incidencias en el momento.", // Correcta
+            "Mantenimiento de equipos y reparaciones de infraestructura, que es función de Mantenimiento.",
+            "Gestión de nóminas y vacaciones del personal, que es función de RRHH."
+        ],
+        a: 1,
+        e: "El Front Office es la cara del hotel y se centra en la interacción con el cliente."
+    },
+    {
+        q: "La necesidad de una 'Cuantificación de la plantilla' se basa en la atención que debe ofrecer Recepción, que es de:",
+        options: [
+            "8 horas al día, cubriendo únicamente el horario de oficina de 9:00 a 17:00.",
+            "4 horas al día, limitando el servicio a las horas pico de Check-in.",
+            "24 horas al día, 7 días a la semana, lo que exige una planificación de turnos y personal rigurosa para asegurar la cobertura constante.", // Correcta
+            "Solo durante el día, dejando al huésped sin servicio de Recepción durante la noche."
+        ],
+        a: 2,
+        e: "La recepción opera continuamente, lo que exige una planificación de personal rigurosa."
+    },
+    {
+        q: "Si el CRS (Sistema Central de Reservas) está enlazado al PMS, su función principal es:",
+        options: [
+            "Vender aviones y billetes de tren a través de un canal de distribución global.",
+            "Recibir, gestionar y enviar reservas de un sector especializado al PMS del hotel, actualizando el inventario en tiempo real.", // Correcta
+            "Limpiar el lobby y las zonas comunes antes de la llegada de los huéspedes.",
+            "Hacer llamadas de broma a los clientes para verificar si están disfrutando de su estancia."
+        ],
+        a: 1,
+        e: "El CRS maneja la entrada de reservas de un sector y las comunica al sistema principal."
+    },
+    {
+        q: "La 'facturación y caja' en Recepción implica la liquidación de cuentas y la gestión de:",
+        options: [
+            "Los muebles y el inventario de mobiliario del hotel, tarea del departamento de Compras.",
+            "Los cobros y pagos de los huéspedes (efectivo, tarjeta, transferencias), asegurando que todas las transacciones estén debidamente registradas y cuadradas.", // Correcta
+            "Los libros de la biblioteca del hotel y su catálogo para préstamo a los clientes.",
+            "El aire acondicionado central y la climatización de las zonas comunes, tarea de Mantenimiento."
+        ],
+        a: 1,
+        e: "La gestión de caja se refiere a la entrada y salida de dinero por servicios."
+    },
+    {
+        q: "¿Cuál es un ejemplo de dispositivo que permite la toma de comandas de forma inalámbrica en el Bar o el Restaurante?",
+        options: [
+            "Un PC de escritorio con un cable de red, que está anclado a un punto fijo.",
+            "Un TPV fijo de sobremesa, que no puede ser movilizado para atender mesas a distancia.",
+            "Una PDA (Personal Digital Assistant), que por su portabilidad y conexión WiFi es ideal para el servicio móvil de comidas y bebidas.", // Correcta
+            "Una impresora de facturas y *tickets* que solo se encarga de emitir documentos."
+        ],
+        a: 2,
+        e: "La PDA, por su portabilidad, es ideal para la toma de comandas móvil."
+    },
+    {
+        q: "El control en Recepción busca la 'mejora continua'. Esto se logra a través de:",
+        options: [
+            "Ignorar los errores y fallos de proceso para evitar conflictos en el equipo.",
+            "La revisión constante, la autoevaluación, la implementación de protocolos estandarizados y la adaptación al contexto.", // Correcta
+            "Hacer siempre lo mismo, sin cambiar ningún proceso ni política de servicio.",
+            "No escuchar al cliente ni a las quejas, asumiendo que el servicio es perfecto."
+        ],
+        a: 1,
+        e: "La mejora continua es un ciclo de revisión y adaptación."
+    },
+    {
+        q: "La relación entre Recepción y Dirección (Gerencia) se enfoca en:",
+        options: [
+            "Los chismes y rumores del personal, informando sobre las quejas internas y los conflictos.",
+            "El reporte diario de resultados operativos (ocupación, ingresos) y la implementación de políticas y objetivos estratégicos definidos por la gerencia.", // Correcta
+            "La limpieza de baños y el stock de jabón, una tarea de Pisos.",
+            "El cambio de bombillas y la reparación de enchufes en las habitaciones."
+        ],
+        a: 1,
+        e: "Recepción reporta directamente a la Dirección de Alojamiento, brindando información operativa crítica."
+    },
+    {
+        q: "Si un cliente olvida su pasaporte o un objeto de valor, ¿qué subdepartamento lo gestionará?",
+        options: [
+            "Mantenimiento, que lo catalogará como una avería y lo reparará.",
+            "Conserjería (o Front Desk), que se encarga de la gestión de objetos perdidos, su registro y el contacto con el huésped para su devolución.", // Correcta
+            "Cocina, que lo guardará en la cámara frigorífica hasta que sea reclamado.",
+            "Telefonista, que llamará al número del pasaporte para informar del hallazgo."
+        ],
+        a: 1,
+        e: "Conserjería o el Front Desk se encargan de la gestión de objetos perdidos."
+    },
+    {
+        q: "El TPV, al minimizar errores en la transcripción de cargos, ayuda a la Recepción en su función de:",
+        options: [
+            "Comercialización y marketing, ya que un buen cobro atrae a más clientes.",
+            "Control de caja y facturación, asegurando que el arqueo de caja cuadre con el PMS y que la factura sea correcta.", // Correcta
+            "Limpieza de habitaciones, ya que el TPV informa a Pisos sobre el estado de la factura del huésped.",
+            "Seguridad, ya que minimiza el riesgo de robo de efectivo en los puntos de venta."
+        ],
+        a: 1,
+        e: "Una facturación sin errores es clave para un buen control de caja."
+    },
+    {
+        q: "¿Cuál es el propósito esencial del Check-in, desde una perspectiva administrativa?",
+        options: [
+            "Aprobar una inspección de calidad de la habitación antes de su asignación, una tarea de Pisos.",
+            "Formalizar la entrada del huésped, el registro legal de datos en el sistema y la asignación de la habitación.", // Correcta
+            "Reparar una avería urgente en el sistema de llaves electrónicas.",
+            "Cerrar el hotel a la entrada de más huéspedes para evitar el *overbooking*."
+        ],
+        a: 1,
+        e: "El check-in es el proceso de registro oficial."
+    },
+    {
+        q: "La parametrización del PMS (Property Management System) incluye definir las:",
+        options: [
+            "Medidas de los jardines y el tipo de plantas que se van a utilizar en las zonas comunes.",
+            "Tarifas aplicables, los tipos de habitación, las políticas de cobro y los protocolos de Check-in y Check-out que el sistema debe seguir.", // Correcta
+            "Recetas de cocina para el restaurante y el bar, incluyendo los costes de materia prima.",
+            "Marcas de café y té que se ofrecen en el minibar de las habitaciones."
+        ],
+        a: 1,
+        e: "Se configuran los aspectos operativos y comerciales del hotel en el sistema."
+    },
+    {
+        q: "Un ERP consta de varios módulos. Si una empresa adquiere uno, busca la gestión:",
+        options: [
+            "Aislada de cada departamento, de forma que el fallo de uno no afecte al otro.",
+            "Centralizada e integral de los procesos (Finanzas, RRHH, Ventas), garantizando la trazabilidad de la información en toda la organización.", // Correcta
+            "Solo de las ventas y la facturación, dejando la contabilidad y RRHH en sistemas separados.",
+            "Solo de la contabilidad y el presupuesto, sin afectar la operativa de ventas y personal."
+        ],
+        a: 1,
+        e: "La integración y centralización de la información es el gran valor del ERP."
+    },
+    {
+        q: "En el TPV, el 'Punto de Venta' se refiere a:",
+        options: [
+            "El hotel en su totalidad, ya que todo el establecimiento es un punto de venta potencial.",
+            "Cualquier lugar dentro del hotel donde se realice un cobro por un servicio o producto (Bar, Restaurante, Recepción, Spa, etc.).", // Correcta
+            "Solo la tienda de regalos, que vende *souvenirs* y artículos de conveniencia.",
+            "Solo la Recepción, ya que es el único lugar donde se gestiona el efectivo del huésped."
+        ],
+        a: 1,
+        e: "Un Punto de Venta es cualquier centro de consumo dentro del establecimiento."
+    },
+    {
+        q: "La principal función de Conserjería (Concierge) es:",
+        options: [
+            "Limpiar el polvo y las superficies de las zonas comunes del hotel.",
+            "Asistencia personalizada y gestión de servicios auxiliares (reservas externas, información turística, mensajería), para elevar la experiencia del huésped.", // Correcta
+            "Hacer la cena y preparar el menú para los huéspedes con dietas especiales.",
+            "Escribir correos electrónicos de marketing a los clientes después de su estancia."
+        ],
+        a: 1,
+        e: "Se enfoca en el servicio al cliente más allá de las funciones básicas de recepción."
+    },
+    {
+        q: "La Recepción debe coordinarse con Mantenimiento para evitar:",
+        options: [
+            "Que el cliente pague su factura, ya que el mantenimiento es un servicio gratuito.",
+            "Asignar a un nuevo huésped habitaciones que tengan averías pendientes, lo que causaría una mala experiencia y un conflicto en el *early check-in*.", // Correcta
+            "Que se haga de día, ya que Mantenimiento solo trabaja de noche.",
+            "Que el teléfono suene, limitando la comunicación para evitar distracciones del personal."
+        ],
+        a: 1,
+        e: "Es vital no vender o asignar habitaciones que no están en perfecto estado."
+    },
+    {
+        q: "¿Qué función del PMS permite aplicar 'estrategias dinámicas de precios' (Revenue Management)?",
+        options: [
+            "El registro en tiempo real de reservas y ocupación, que permite al hotel ajustar las tarifas según la demanda y el *forecast*.", // Correcta
+            "La impresión de facturas y documentos contables para el cliente.",
+            "La gestión de llaves electrónicas y el control de acceso a las habitaciones.",
+            "La alarma de incendios, que es un sistema de seguridad independiente."
+        ],
+        a: 0,
+        e: "La actualización instantánea de la ocupación permite al hotel modificar precios según la demanda."
+    },
+    {
+        q: "El Jefe/a de Recepción es responsable de la supervisión de las tareas de:",
+        options: [
+            "Solo el telefonista, ya que es el subdepartamento que genera más llamadas.",
+            "Todo el personal a su cargo (Recepcionistas, Botones, Telefonistas y Auditor Nocturno), asegurando la eficiencia operativa de todos los turnos.", // Correcta
+            "Solo el Auditor Nocturno, ya que es el que gestiona el efectivo de la caja fuerte.",
+            "Solo el director general, reportando las incidencias de su superior jerárquico."
+        ],
+        a: 1,
+        e: "El Jefe de Recepción supervisa a todos los subdepartamentos bajo su mando."
+    },
+    {
+        q: "La seguridad en Recepción incluye la gestión de las llaves/tarjetas para controlar el acceso y evitar:",
+        options: [
+            "Que la gente salga del hotel sin pagar la factura final.",
+            "Que personas no autorizadas, como extraños o personal no autorizado, entren en las habitaciones ocupadas o zonas restringidas del hotel.", // Correcta
+            "Que se acabe la comida y la bebida en el minibar de las habitaciones.",
+            "Que se encienda la televisión en la habitación sin autorización del Recepcionista."
+        ],
+        a: 1,
+        e: "El control de accesos es una medida de seguridad fundamental para el huésped."
+    },
+    {
+        q: "El CHANNEL MANAGER se conecta con el PMS y el GDS para asegurar la consistencia en:",
+        options: [
+            "El color de los uniformes del personal de Recepción y Pisos.",
+            "Inventario de habitaciones y tarifas, garantizando que el precio y la disponibilidad sean los mismos en todos los canales de distribución online.", // Correcta
+            "El tipo de música ambiental que se escucha en el lobby del hotel.",
+            "La hora del desayuno y el tipo de alimentos que se ofrecen a los huéspedes."
+        ],
+        a: 1,
+        e: "Su función es mantener la paridad de datos entre sistemas y canales de venta."
+    },
+    {
+        q: "¿Cuál es el principal punto de 'contacto' entre el hotel y el huésped durante la mayor parte de la estancia?",
+        options: [
+            "El garaje o zona de parking, donde el huésped deja su vehículo.",
+            "La Recepción (Front Desk), que sirve como centro neurálgico para la atención, la resolución de dudas y la coordinación de servicios 24/7.", // Correcta
+            "El tejado, que es donde se encuentra el sistema de climatización.",
+            "La lavandería, donde el huésped deja su ropa para ser limpiada."
+        ],
+        a: 1,
+        e: "La Recepción es el centro neurálgico de la atención al cliente."
+    },
+    {
+        q: "El subdepartamento de Teléfonos es también conocido como:",
+        options: [
+            "El servicio de habitaciones, que se encarga de la entrega de comidas y bebidas en las estancias.",
+            "La centralita, que es el centro de control de las comunicaciones internas y externas del hotel.", // Correcta
+            "La oficina de correos, que se encarga del envío de cartas y paquetes postales.",
+            "El almacén, que gestiona el inventario de suministros y materiales."
+        ],
+        a: 1,
+        e: "Centralita es el término tradicional para el servicio de gestión de llamadas y mensajes."
+    },
+    {
+        q: "¿Qué hace que el ERP esté protegido ante posible 'espionaje'?",
+        options: [
+            "Su ubicación física en una sala con llave, limitando el acceso manual al equipo.",
+            "Sus protocolos de seguridad y cifrado, que protegen los datos financieros y de RRHH contra el acceso no autorizado a través de la red.", // Correcta
+            "Su bajo precio, ya que los sistemas más baratos son menos atractivos para los hackers.",
+            "Su color oscuro, que lo hace difícil de detectar en la red del hotel."
+        ],
+        a: 1,
+        e: "La protección contra espionaje se refiere a la seguridad informática de los datos sensibles."
+    },
+];
         
         // --- 2. STATE MANAGEMENT ---
         const TOTAL_QUESTIONS = 20; // <-- usa esta constante por todo el script
